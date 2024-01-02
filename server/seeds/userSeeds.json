@@ -1,60 +1,60 @@
 [
   {
-    "username": "john_doe",
+    "username": "johndoe",
     "email": "john.doe@example.com",
     "password": "password123",
     "accounts": []
   },
   {
-    "username": "jane_smith",
+    "username": "janesmith",
     "email": "jane.smith@example.com",
     "password": "password123",
     "accounts": []
   },
   {
-    "username": "alex_johnson",
+    "username": "alexjohnson",
     "email": "alex.johnson@example.com",
     "password": "password123",
     "accounts": []
   },
   {
-    "username": "emily_wilson",
+    "username": "emilywilson",
     "email": "emily.wilson@example.com",
     "password": "password123",
     "accounts": []
   },
   {
-    "username": "michael_brown",
+    "username": "michaelbrown",
     "email": "michael.brown@example.com",
     "password": "password123",
     "accounts": []
   },
   {
-    "username": "sophia_miller",
+    "username": "sophiamiller",
     "email": "sophia.miller@example.com",
     "password": "password123",
     "accounts": []
   },
   {
-    "username": "david_davis",
+    "username": "daviddavis",
     "email": "david.davis@example.com",
     "password": "password123",
     "accounts": []
   },
   {
-    "username": "olivia_jones",
+    "username": "oliviajones",
     "email": "olivia.jones@example.com",
     "password": "password123",
     "accounts": []
   },
   {
-    "username": "william_garcia",
+    "username": "williamgarcia",
     "email": "william.garcia@example.com",
     "password": "password123",
     "accounts": []
   },
   {
-    "username": "ava_rodriguez",
+    "username": "avarodriguez",
     "email": "ava.rodriguez@example.com",
     "password": "password123",
     "accounts": []

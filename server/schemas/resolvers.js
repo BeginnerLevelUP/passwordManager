@@ -8,7 +8,7 @@ const resolvers={
             return await User.find({}).populate('accounts')
         },
         user:async(parent,{username})=>{
-            return await User.find({username}).populate('accounts')
+            return await User.findOne({username}).populate('accounts')
         },
         me:async(parent,args,context)=>{
             if(context.user){

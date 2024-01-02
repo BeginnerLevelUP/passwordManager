@@ -27,8 +27,8 @@ me:User
 
 type Mutation{
     signup(username:String!,email:String!,password:String!):Auth
-    login(email:String!,password:String):Auth
-    addAccounts(owner:String!,username:String!,email:String!,password:String!):User
+    login(email:String!,password:String!):Auth
+    addAccount(owner:String!,username:String!,email:String!,password:String!):User
 }
 `
 
