@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom"
-
+import Auth from "../../utils/auth"
 function Header(){
+
+      // Logout User
+   const logout = (event) => {
+    event.preventDefault();
+    Auth.logout();}
     return(
         <>
         <header>
@@ -20,8 +25,13 @@ function Header(){
   </button>
 
   <button>
-      <Link to='/login'>Signup</Link>
+      <Link to='/signup'>Signup</Link>
   </button>
+
+
+  <a onClick={logout}>
+     Logout
+  </a>
 </header>
         </>
     )

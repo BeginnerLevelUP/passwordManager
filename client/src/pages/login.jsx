@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client';
 import { LOGIN } from '../../utils/mutations';
 import Auth from '../../utils/auth'
 
-function CredentialsPage(){
+function LoginPage(){
     const [formState,setFormState]=useState({
         email:'',
         password:''
@@ -41,6 +41,7 @@ function CredentialsPage(){
     
     return(
         <>
+        <h1>LOGIN</h1>
         {data ? (
             <p>
              <Link to="/">back to the homepage.</Link>
@@ -77,4 +78,4 @@ function CredentialsPage(){
     )
 }
 
-export default CredentialsPage
+export default LoginPage
