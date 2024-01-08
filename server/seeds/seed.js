@@ -9,7 +9,7 @@ db.once('open', async () => {
     try {
         await cleanDB('Account', 'accounts');
         await cleanDB('User', 'users');
-        await cleanDb('Password','passwords')
+        await cleanDB('Password','passwords')
 
         // const users = await User.create(usersSeed);
         // const accounts=await Account.create(accountsSeed)
