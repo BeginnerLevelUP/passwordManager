@@ -4,7 +4,7 @@ function Footer(){
 
 <footer>
   <aside>
-    <h1>FOOTER</h1>
+    <h1></h1>
   <h2>Damion Morgan</h2>
 </aside>
 
