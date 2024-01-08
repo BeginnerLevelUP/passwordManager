@@ -35,7 +35,11 @@ function SignupPage(){
       console.error(e);
     }
   };
-
+if(Auth.loggedIn()){
+  return(
+    <h1>Already SIGNED IN</h1>
+  )
+}
   return (
     <>
    {data ? (

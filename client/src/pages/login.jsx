@@ -38,7 +38,11 @@ function LoginPage(){
         })
 
     }
-    
+    if(Auth.loggedIn()){
+  return(
+    <h1>Already SIGNED IN</h1>
+  )
+}
     return(
         <>
         <h1>LOGIN</h1>

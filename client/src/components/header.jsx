@@ -7,33 +7,42 @@ function Header(){
     event.preventDefault();
     Auth.logout();}
     return(
-        <>
-        <header>
-  <h1>
+    <header>
+          <h1>
     Password 
     <span>Generator</span>
   </h1>
 
   <h2>Meant to generate the password of your dreams!!!</h2>
 
-  <button>
-      <Link to='/'>Home</Link>
-  </button>
+        <Link to='/'>
+            <button>
+                Home
+            </button>
+        </Link>
 
-  <button>
-      <Link to='/login'>Login</Link>
-  </button>
+        {!Auth.loggedIn()?(
+        <>
+        <Link to='/login'>
+            <button>
+                Login
+            </button>
+        </Link>
 
-  <button>
-      <Link to='/signup'>Signup</Link>
-  </button>
+        <Link to='/signup'>
+            <button>
+                Signup
+            </button>
+        </Link>
 
-
+        </>
+        ):(
   <a onClick={logout}>
      Logout
   </a>
-</header>
-        </>
+        )}
+
+    </header>
     )
 }
 
