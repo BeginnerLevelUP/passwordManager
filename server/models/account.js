@@ -6,11 +6,9 @@ const bcrypt = require('bcrypt');
 const accountSchema= new Schema({
 username:{
     type:String,
-    required:true,
 },
 email:{
     type:String,
-    required:true,
     match: [/.+@.+\..+/, 'Must be a valid email address!'] // the regex and fail message
 },
 password:{
