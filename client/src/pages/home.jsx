@@ -34,12 +34,19 @@ function HomePage(){
             
         <>
         {/* TextArea where user can type or generate password */}
+        <div className="textareaDiv">
+        <label htmlFor="textInput">
+            Password
+        </label>
         <textarea 
+        id='textInput'
         rows={10}
         cols={100}
         value={text}
         onChange={onTextareaChange}
         ></textarea>
+        </div>
+
 
 
         {/* CheckBoxes to Speicify Password*/}
