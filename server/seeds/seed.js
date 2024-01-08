@@ -1,29 +1,20 @@
 const db = require('../config/connection');
-const { User, Account } = require('../models/index');
+const { User, Account,Password } = require('../models/index');
 const usersSeed = require('./userSeeds.json');
 const accountsSeed=require('./accountSeeds.json')
+const passwordsSeed=require('./passwordSeeds.json')
 const cleanDB = require('./cleanDb');
 
 db.once('open', async () => {
     try {
         await cleanDB('Account', 'accounts');
         await cleanDB('User', 'users');
+        await cleanDb('Password','passwords')
 
-        const users = await User.create(usersSeed);
-        const accounts=await Account.create(accountsSeed)
-
-         if (users.length > 0 && accounts.length > 0) {
-            // Push the first friend's ObjectId to the friends array of the first user
-            // Extract all friend ObjectIds
-            const accountsObjectIds = accounts.map(account => account._id);
-
-            // Push all friend ObjectIds to the first user's friends array
-            users[0].accounts.push(...accountsObjectIds);
+        // const users = await User.create(usersSeed);
+        // const accounts=await Account.create(accountsSeed)
 
 
-            // Save the updated user
-            await users[0].save();
-        }
     } catch (err) {
         console.error(err);
         process.exit(1);

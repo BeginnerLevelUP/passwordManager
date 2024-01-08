@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose');
 
 const passwordSchema=new Schema({
     text:{
-        tpye:String,
+        type:String,
         required:true,
         min:8
     },
