@@ -1,4 +1,4 @@
 const User=require('./user')
 const Account=require('./account')
-
-module.exports={User,Account}
+const Password=require('./password')
+module.exports={User,Account,Password}

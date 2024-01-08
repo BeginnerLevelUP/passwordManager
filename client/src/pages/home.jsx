@@ -1,5 +1,6 @@
 import { useState } from "react"
 import Auth from "../../utils/auth"
+
 function HomePage(){
     // States for the Checkboxes
     const [upper,isUpper]=useState(true)
@@ -129,6 +130,7 @@ function HomePage(){
         </>
 
         ):(
+
             <h1>Gotta Login Lil Bro</h1>
         )
 

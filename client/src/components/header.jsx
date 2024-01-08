@@ -1,49 +1,52 @@
-import { Link } from "react-router-dom"
-import Auth from "../../utils/auth"
-function Header(){
+import { Link } from "react-router-dom";
+import Auth from "../../utils/auth";
 
-      // Logout User
-   const logout = (event) => {
+function Header() {
+  // Logout User
+  const logout = (event) => {
     event.preventDefault();
-    Auth.logout();}
-    return(
+    Auth.logout();
+  };
+
+  return (
     <header>
-          <h1>
-    Password 
-    <span>Generator</span>
-  </h1>
-
-  <h2>Meant to generate the password of your dreams!!!</h2>
-
-        <Link to='/'>
-            <button>
-                Home
-            </button>
-        </Link>
-
-        {!Auth.loggedIn()?(
+      {!Auth.loggedIn() ? (
         <>
-        <Link to='/login'>
+          <Link to='/login'>
             <button>
-                Login
+              Login
             </button>
-        </Link>
+          </Link>
 
-        <Link to='/signup'>
+          <Link to='/signup'>
             <button>
-                Signup
+              Signup
             </button>
-        </Link>
-
+          </Link>
         </>
-        ):(
-  <a onClick={logout}>
-     Logout
-  </a>
-        )}
+      ) : (
+        <>
+          <h1>
+            Password <span>Generator</span>
+          </h1>
 
+          <h2>Meant to generate the password of your dreams!!!</h2>
+
+          <Link to='/'>
+            <button>
+              Home
+            </button>
+          </Link>
+
+          <a onClick={logout} href='/'>
+            Logout
+          </a>
+        </>
+      )}
     </header>
-    )
+  );
 }
+
+
 
 export default Header
