@@ -4,23 +4,22 @@ const bcrypt = require('bcrypt');
 
 
 const accountSchema= new Schema({
-    username:{
+username:{
     type:String,
     required:true,
-    unique:true,
-    match: [/^[a-zA-Z0-9]+$/,'Alphanumber Charcters only'] //REGEX to only allow alphanumeric characters
 },
 email:{
     type:String,
     required:true,
-    unique:true,
-    match: [/.+@.+\..+/, 'Must match an email address!'] // the regex and fail message
+    match: [/.+@.+\..+/, 'Must be a valid email address!'] // the regex and fail message
 },
 password:{
-    type:String,
-    require:true,
-    unique:true,
-    minlength:5,
+type:Schema.Types.ObjectId, 
+ref:'Password'
+},
+websiteUrl:{
+type:String,
+match:[/^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/,'Must be a valid website']
 },
 created:{
     type:Date,

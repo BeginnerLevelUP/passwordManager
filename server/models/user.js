@@ -19,10 +19,8 @@ email:{
     match: [/.+@.+\..+/, 'Must match an email address!'] // the regex and fail message
 },
 password:{
-    type:String,
-    require:true,
-    unique:true,
-    minlength:5,
+type:Schema.Types.ObjectId, 
+ref:'Password'
 },
 accounts:[
     {
