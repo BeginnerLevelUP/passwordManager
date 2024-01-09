@@ -26,6 +26,10 @@ const passwordSchema=new Schema({
     specialCharacter:{
         type:Boolean,
         default:true,
+    },
+    strength:{
+        type:String,
+        enum:['bad','good','great']
     }
 })
 // Middleware to runs before the saving to the database 
@@ -45,8 +49,25 @@ passwordSchema.pre('save', async function (next) {
         
         //Setting the Length 
         this.length=this.text.length
+        
+        //Setting the Strength of the password 
+        // Calculate strength based on the criteria met
+        let criteriaMet = 0;
+        if (this.uppercase) criteriaMet++;
+        if (this.lowercase) criteriaMet++;
+        if (this.number) criteriaMet++;
+        if (this.specialCharacter) criteriaMet++;
 
+        // Set password strength based on the number of criteria met
+        if (criteriaMet >= 3) {
+            this.strength = 'great';
+        } else if (criteriaMet === 2) {
+            this.strength = 'good';
+        } else {
+            this.strength = 'bad';
+        }
 
+        // Hash the
         const saltRounds = 10; // the amount hash rounds 
        this.text = await bcrypt.hash(this.text, saltRounds);
 
