@@ -1,6 +1,6 @@
 import { useState } from "react"
 import Auth from "../../utils/auth"
-
+import genService from "../../utils/genPassword"
 function HomePage(){
     // States for the Checkboxes
     const [upper,isUpper]=useState(true)
@@ -17,7 +17,6 @@ function HomePage(){
     // Function that changes the state and keeps it modular
     const onCheckboxChange=(variable,stateChange)=>{   
         stateChange(!variable)
-        console.log(variable)
     }
 
     // Function that changes the state of the rnage
@@ -29,6 +28,23 @@ function HomePage(){
     const onTextareaChange=({target})=>{
         setText(target.value)
     }
+
+const onGenClick = () => {
+      const defaultOptions =
+        upper === true &&
+        lower === true &&
+        num === true &&
+        spec === true &&
+        length === 50;
+        if(!defaultOptions){
+            const customPassword=genService.genUserPsw(length,upper,lower,num,spec)
+            setText(customPassword)
+        }else{
+        const defaultPassword = genService.getDefault();
+        setText(defaultPassword)
+        }
+
+};
     
     return(
         Auth.loggedIn()?(
@@ -113,7 +129,7 @@ function HomePage(){
         {/* Range for Length */}
         <div className="rangeDiv">
             <label htmlFor="pwdLength">
-                Length
+                Length : {length}
             </label>
             <input
             id='pwdLength'
@@ -126,7 +142,7 @@ function HomePage(){
         </div>
 
         {/* Button To Generate */}
-            <button>Generate Password</button>
+            <button onClick={onGenClick}>Generate Password</button>
         </>
 
         ):(

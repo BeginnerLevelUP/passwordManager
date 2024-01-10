@@ -41,7 +41,7 @@ function App() {
   return (
     <>
      <ApolloProvider client={client}>
-      <Header />  UNCOMMENT LATER
+      <Header /> 
       <Outlet></Outlet>
       {/* <Footer /> UNCOMMENT LATER*/}
       </ApolloProvider>

@@ -4,7 +4,7 @@
 // https://www.npmjs.com/package/generate-password-browser -- BROWSER SUPPORT
 // */
 
-import generatePassword from 'generate-password';
+import generatePassword from 'generate-password-browser';
 
 /* Function Criteria
  Must be able to generate a password selectivey (adding and excluding character types)
@@ -19,7 +19,7 @@ class GenService{
 // 2)Uses all character types
 // */
     const defaultpassword = generatePassword.generate({
-    length: 12,
+    length: 50,
     numbers: true,
     symbols: true,
     uppercase: true,
@@ -37,6 +37,7 @@ class GenService{
     uppercase: lower,
     lowercase:upper,
   });
+  return userPsw
     }
 
 }
