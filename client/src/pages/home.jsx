@@ -1,7 +1,9 @@
 import { useState } from "react"
 import Auth from "../../utils/auth"
-
+import genService from "../../utils/genPassword"
 function HomePage(){
+    //User has to be logged in to save password
+
     // States for the Checkboxes
     const [upper,isUpper]=useState(true)
     const [lower,isLower]=useState(true)
@@ -17,7 +19,6 @@ function HomePage(){
     // Function that changes the state and keeps it modular
     const onCheckboxChange=(variable,stateChange)=>{   
         stateChange(!variable)
-        console.log(variable)
     }
 
     // Function that changes the state of the rnage
@@ -29,11 +30,30 @@ function HomePage(){
     const onTextareaChange=({target})=>{
         setText(target.value)
     }
-    
+
+const onGenClick = () => {
+      const defaultOptions =
+        upper === true &&
+        lower === true &&
+        num === true &&
+        spec === true &&
+        length === 50;
+        if(!defaultOptions){
+            const customPassword=genService.genUserPsw(length,upper,lower,num,spec)
+            setText(customPassword)
+        }else{
+        const defaultPassword = genService.getDefault();
+        setText(defaultPassword)
+        }
+
+};
+
+const onSaveClick=()=>{
+
+}
     return(
-        Auth.loggedIn()?(
-            
         <>
+        
         {/* TextArea where user can type or generate password */}
         <div className="textareaDiv">
         <label htmlFor="textInput">
@@ -113,7 +133,7 @@ function HomePage(){
         {/* Range for Length */}
         <div className="rangeDiv">
             <label htmlFor="pwdLength">
-                Length
+                Length : {length}
             </label>
             <input
             id='pwdLength'
@@ -126,14 +146,18 @@ function HomePage(){
         </div>
 
         {/* Button To Generate */}
-            <button>Generate Password</button>
-        </>
+            <button onClick={onGenClick}>Generate Password</button>
 
-        ):(
+  {          !Auth.loggedIn()?(
+     <button onClick={onSaveClick}>Must be logged in to Save Password</button>
+    //  add some css later
+            ):(
+     <button onClick={onSaveClick}>Save Password</button>
+            )}
+       
 
-            <h1>Gotta Login Lil Bro</h1>
-        )
-
+        
+    </>
     )
 }
 
