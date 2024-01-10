@@ -2,6 +2,8 @@ import { useState } from "react"
 import Auth from "../../utils/auth"
 import genService from "../../utils/genPassword"
 function HomePage(){
+    //User has to be logged in to save password
+
     // States for the Checkboxes
     const [upper,isUpper]=useState(true)
     const [lower,isLower]=useState(true)
@@ -45,11 +47,13 @@ const onGenClick = () => {
         }
 
 };
-    
+
+const onSaveClick=()=>{
+
+}
     return(
-        Auth.loggedIn()?(
-            
         <>
+        
         {/* TextArea where user can type or generate password */}
         <div className="textareaDiv">
         <label htmlFor="textInput">
@@ -143,13 +147,17 @@ const onGenClick = () => {
 
         {/* Button To Generate */}
             <button onClick={onGenClick}>Generate Password</button>
-        </>
 
-        ):(
+  {          !Auth.loggedIn()?(
+     <button onClick={onSaveClick}>Must be logged in to Save Password</button>
+    //  add some css later
+            ):(
+     <button onClick={onSaveClick}>Save Password</button>
+            )}
+       
 
-            <h1>Gotta Login Lil Bro</h1>
-        )
-
+        
+    </>
     )
 }
 
