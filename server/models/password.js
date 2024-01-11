@@ -9,23 +9,18 @@ const passwordSchema=new Schema({
     },
     length:{
         type:Number,
-        min:8
     },
     uppercase:{
         type:Boolean,
-        default:true,
     },
     lowercase:{
-        type:Boolean,
-        default:true,  
+        type:Boolean,  
     },
     number:{
         type:Boolean,
-        default:true,
     },
     specialCharacter:{
         type:Boolean,
-        default:true,
     },
     strength:{
         type:String,

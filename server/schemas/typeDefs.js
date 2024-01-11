@@ -3,7 +3,7 @@ type User {
     _id: ID
     username: String
     email: String
-    password: [Password]
+    password: Password
     accounts:[Account]
 }
 
@@ -11,7 +11,10 @@ type Account{
     _id:ID
     username:String
     email:String
-    password:[Password]
+    websiteUrl:String
+    notes:String
+    create:String
+    password:Password
 }
 
 type Password{
@@ -38,7 +41,7 @@ me:User
 type Mutation{
     signup(username:String!,email:String!,password:String!):Auth
     login(email:String!,password:String!):Auth
-  
+     addNewAccount(passwordText:String!,username:String,email:String,websiteUrl:String,notes:String,currentUsername:String!):Account
 }
 `
 
