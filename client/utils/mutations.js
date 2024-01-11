@@ -22,3 +22,24 @@ mutation Mutation($email: String!, $password: String!) {
   }
 }
 `
+export const ADD_ACCOUNT=gql`
+mutation Mutation($passwordText: String!, $currentUsername: String!, $username: String, $email: String, $websiteUrl: String, $notes: String) {
+  addNewAccount(passwordText: $passwordText, currentUsername: $currentUsername, username: $username, email: $email, websiteUrl: $websiteUrl, notes: $notes) {
+    _id
+    username
+    email
+    websiteUrl
+    notes
+    create
+    password {
+      _id
+      text
+      length
+      uppercase
+      lowercase
+      number
+      specialCharacter
+    }
+  }
+}
+`

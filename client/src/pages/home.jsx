@@ -2,7 +2,6 @@ import Auth from "../../utils/auth";
 import SavePassword from "../components/savePassword";
 import GenPassword from "../components/genPassword";
 import React, { useState } from 'react';
-import Form from 'react-bootstrap/Form';
 import Toast from 'react-bootstrap/Toast';
 import ToastContainer from 'react-bootstrap/ToastContainer';
 
