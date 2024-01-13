@@ -8,17 +8,20 @@ import ToastContainer from 'react-bootstrap/ToastContainer';
 function HomePage() {
   const [showToast, setShowToast] = useState(false);
   const [position, setPosition] = useState('top-start');
+  const [password,setPassword]=useState('')
 
   const onSaveClick = () => {
     setShowToast(!showToast);
-    // Your logic for save click goes here
   };
-
+  const onGen=(password)=>{
+    setPassword(password)
+  }
+  
   const toggleToast = () => setShowToast(!showToast);
 
   return (
     <>
-      <GenPassword></GenPassword>
+      <GenPassword onGen={onGen}></GenPassword>
 
       {!Auth.loggedIn() ? (
         <>
@@ -54,7 +57,7 @@ function HomePage() {
           )}
         </>
       ) : (
-        <SavePassword></SavePassword>
+        <SavePassword Password={password}></SavePassword>
       )}
     </>
   );

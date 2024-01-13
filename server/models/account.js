@@ -24,7 +24,6 @@ default:null
 },
 notes:{
     type:String,
-    default:'Untitled Password'
 },
 created:{
     type:Date,
@@ -33,14 +32,7 @@ created:{
 }
 })
 
-accountSchema.pre('save',async function(next){
-    // if the fields are filled in the notes are left empty
-  if (this.username !== null || this.email !== null || this.websiteUrl !== null) {
-    this.notes = '';
-  }
 
-  next();
-})
 const Account = model('Account', accountSchema);
 
 module.exports = Account;

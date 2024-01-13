@@ -1,7 +1,7 @@
 import { useState } from "react"
 import genService from "../../../utils/genPassword"
-function GenPassword(){
-    //User has to be logged in to save password
+function GenPassword({onGen}){
+    
 
     // States for the Checkboxes
     const [upper,isUpper]=useState(true)
@@ -40,9 +40,11 @@ const onGenClick = () => {
         if(!defaultOptions){
             const customPassword=genService.genUserPsw(length,upper,lower,num,spec)
             setText(customPassword)
+            onGen(customPassword)
         }else{
         const defaultPassword = genService.getDefault();
         setText(defaultPassword)
+        onGen(defaultPassword)
         }
 
 };
