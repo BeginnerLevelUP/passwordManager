@@ -12,6 +12,7 @@ function GenPassword({onGen}){
     // State for Range
     const [length,setLength]=useState(50)
     const [range,setRange]=useState(false)
+    
     //State for Textarea
     const [text,setText]=useState('')
 
