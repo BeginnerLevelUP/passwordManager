@@ -43,13 +43,12 @@ function GenPassword({onGen}){
           isSpec(userResults.spec)
           isNum(userResults.num)
           setLength(target.value.length)
-
+          
           if(!target.value){
             window.location.reload()
           }
-        }
     }
-
+  }
     const onTextAreaClick=()=>{
         setText('')
     }

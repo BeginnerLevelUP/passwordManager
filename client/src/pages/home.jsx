@@ -1,6 +1,7 @@
 import Auth from "../../utils/auth";
 import SavePassword from "../components/savePassword";
-import GenPassword from "../components/genPassword";
+import GenPassword from "../components/genPassword"
+import PasswordStatus from "../components/pwdStatus";
 import React, { useState } from 'react';
 import Toast from 'react-bootstrap/Toast';
 import ToastContainer from 'react-bootstrap/ToastContainer';
@@ -16,13 +17,12 @@ function HomePage() {
   const onGen=(password)=>{
     setPassword(password)
   }
-  
+
   const toggleToast = () => setShowToast(!showToast);
 
   return (
     <>
       <GenPassword onGen={onGen}></GenPassword>
-
       {!Auth.loggedIn() ? (
         <>
           <button onClick={onSaveClick} className="mb-2">
@@ -59,6 +59,7 @@ function HomePage() {
       ) : (
         <SavePassword Password={password}></SavePassword>
       )}
+      <PasswordStatus userResults={'dfsdafadf'}></PasswordStatus>
     </>
   );
 }

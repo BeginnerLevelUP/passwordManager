@@ -62,6 +62,46 @@ return {
 
     }
 
-}
+    strength(userResults){
+      /*
+      takes in the object that was returned from the testUser function (the one above)
+      the loop through the object and seperate the true from the false
+      now you can determine how good the password is 
+          only one then bad password
+          if it has two or more it is good
+          if has all 4 then great
+        (similar to something on the backend )
+      */
+  const trueProperties = {};
+  for (const results in userResults) {
+    if (userResults[results]) {
+      trueProperties[results] = true;
+    }
+  }
+
+  const falseProperties = {};
+  for (const results in userResults) {
+    if (!userResults[results]) {
+      falseProperties[results] = false;
+    }
+  }
+
+  // let status;
+  //   if(Object.keys(trueProperties).length === 1 && Object.keys(trueProperties).length < 4){
+  //     status='bad'
+  //   }else if(Object.keys(trueProperties).length > 1 && Object.keys(trueProperties).length < 4){
+  //     status='good'
+  //   }else if(Object.keys(trueProperties).length === 4){
+  //     status='great'
+  //   }else{
+  //     status='N/A'
+  //   }
+        
+    return {trueProperties,falseProperties,}
+    //status
+    }
+    
+    }
+
 
 export default new GenService()
