@@ -11,9 +11,13 @@ function GenPassword({onGen}){
 
     // State for Range
     const [length,setLength]=useState(50)
-
+    const [range,setRange]=useState(false)
     //State for Textarea
     const [text,setText]=useState('')
+
+    // Getting The variables needed 
+    const customPassword=genService.genUserPsw(length,upper,lower,num,spec)
+    const defaultPassword = genService.getDefault();
 
     // Function that changes the state and keeps it modular
     const onCheckboxChange=(variable,stateChange)=>{   
@@ -28,9 +32,31 @@ function GenPassword({onGen}){
     //Function that changes the state of the textarea
     const onTextareaChange=({target})=>{
         setText(target.value)
+        onGen(target.value) 
+
+        if(target.value!==customPassword || target.value!==defaultPassword){
+            setRange(false)
+          const userResults=  genService.testUser(target.value)
+          isUpper(userResults.upper)
+          isLower(userResults.lower)
+          isSpec(userResults.spec)
+          isNum(userResults.num)
+          setLength(target.value.length)
+
+          if(!target.value){
+            window.location.reload()
+          }
+        }
     }
 
+    const onTextAreaClick=()=>{
+        setText('')
+    }
+
+
+
 const onGenClick = () => {
+    setRange(true)
       const defaultOptions =
         upper === true &&
         lower === true &&
@@ -38,17 +64,14 @@ const onGenClick = () => {
         spec === true &&
         length === 50;
         if(!defaultOptions){
-            const customPassword=genService.genUserPsw(length,upper,lower,num,spec)
             setText(customPassword)
             onGen(customPassword)
         }else{
-        const defaultPassword = genService.getDefault();
         setText(defaultPassword)
         onGen(defaultPassword)
         }
 
 };
-
     return(
         <>
         
@@ -63,6 +86,12 @@ const onGenClick = () => {
         cols={100}
         value={text}
         onChange={onTextareaChange}
+        onClick={onTextAreaClick}
+        placeholder={`
+        Click Generate Button to get a password based on the cretiera below
+                                     Orr
+        Type your password and have the validity checked 
+        `}
         ></textarea>
         </div>
 
@@ -127,21 +156,31 @@ const onGenClick = () => {
 
 
         </div>
-        
-        {/* Range for Length */}
-        <div className="rangeDiv">
-            <label htmlFor="pwdLength">
-                Length : {length}
-            </label>
-            <input
-            id='pwdLength'
-            type='range'
-            min={0}
-            max={200}
-            value={length}
-            onChange={onRangeChange}
-            ></input>
-        </div>
+
+  { /* Range for Length */ }
+{range ? (
+  <div className="rangeDiv">
+    <label htmlFor="pwdLength">
+      Length : {length}
+    </label>
+    <input
+      id='pwdLength'
+      type='range'
+      min={0}
+      max={200}
+      value={length}
+      onChange={onRangeChange}
+    ></input>
+  </div>
+) : (
+  <div className="rangeDiv">
+    <label htmlFor="pwdLength">
+      Length : {length}
+    </label>
+  </div>
+)}
+
+
 
         {/* Button To Generate */}
             <button onClick={onGenClick}>Generate Password</button>
