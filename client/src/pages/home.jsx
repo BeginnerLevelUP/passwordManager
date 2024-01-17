@@ -59,7 +59,7 @@ function HomePage() {
       ) : (
         <SavePassword Password={password}></SavePassword>
       )}
-      <PasswordStatus userResults={'dfsdafadf'}></PasswordStatus>
+      <PasswordStatus userResults={password}></PasswordStatus>
     </>
   );
 }

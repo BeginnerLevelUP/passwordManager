@@ -72,35 +72,34 @@ return {
           if has all 4 then great
         (similar to something on the backend )
       */
-  const trueProperties = {};
-  for (const results in userResults) {
-    if (userResults[results]) {
-      trueProperties[results] = true;
+  let strength = 0;
+  let status;
+
+  for (const property in userResults) {
+    if (userResults.hasOwnProperty(property)) {
+      if (userResults[property] === true) {
+        strength++;
+      } else if (userResults[property] === false) {
+          strength--;
+        if(strength<0){
+          strength=0
+        }
+      }
     }
   }
 
-  const falseProperties = {};
-  for (const results in userResults) {
-    if (!userResults[results]) {
-      falseProperties[results] = false;
-    }
+  if (strength === 1 || strength === 0) {
+    status = 'bad';
+  } else if (strength === 2 || strength === 3) {
+    status = 'good';
+  } else if(strength===4) {
+    status = 'great';
   }
 
-  // let status;
-  //   if(Object.keys(trueProperties).length === 1 && Object.keys(trueProperties).length < 4){
-  //     status='bad'
-  //   }else if(Object.keys(trueProperties).length > 1 && Object.keys(trueProperties).length < 4){
-  //     status='good'
-  //   }else if(Object.keys(trueProperties).length === 4){
-  //     status='great'
-  //   }else{
-  //     status='N/A'
-  //   }
-        
-    return {trueProperties,falseProperties,}
-    //status
+  return { strength, status };
     }
-    
+
+
     }
 
 
