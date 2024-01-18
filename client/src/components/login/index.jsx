@@ -104,7 +104,7 @@ function LoginOrSignUp() {
   return (
     <>
       {/* Login modal */}
-      <button onClick={handleShowLogin}>Login In</button>
+      <button onClick={handleShowLogin}>Login </button>
 
       <Modal show={showLogin} onHide={handleCloseLogin}>
         <Modal.Header closeButton>
