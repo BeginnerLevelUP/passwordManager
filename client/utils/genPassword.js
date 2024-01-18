@@ -89,11 +89,11 @@ return {
   }
 
   if (strength === 1 || strength === 0) {
-    status = 'bad';
+    status = 'Bad';
   } else if (strength === 2 || strength === 3) {
-    status = 'good';
+    status = 'Good';
   } else if(strength===4) {
-    status = 'great';
+    status = 'Great';
   }
 
   return { strength, status };
