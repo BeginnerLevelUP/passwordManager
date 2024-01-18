@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Auth from "../../utils/auth";
-
+import LoginOrSignUp from "./login";
 function Header() {
   // Logout User
   const logout = (event) => {
@@ -12,17 +12,8 @@ function Header() {
     <header>
       {!Auth.loggedIn() ? (
         <>
-          <Link to='/login'>
-            <button>
-              Login
-            </button>
-          </Link>
 
-          <Link to='/signup'>
-            <button>
-              Signup
-            </button>
-          </Link>
+        <LoginOrSignUp></LoginOrSignUp>
         </>
       ) : (
         <>
