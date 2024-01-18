@@ -6,8 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from './App.jsx'
 import './index.css'
 
-import SignupPage from './pages/signup.jsx';
-import LoginPage from './pages/login.jsx';
+
 import HomePage from './pages/home.jsx';
 import ErrorPage from './pages/error.jsx';
 

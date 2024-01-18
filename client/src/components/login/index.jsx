@@ -121,9 +121,8 @@ function LoginOrSignUp() {
               <form onSubmit={handleFormSubmitLogin}>
                 <input
                   className="form-input"
-                  placeholder="Your email"
+                  placeholder="Your email or username"
                   name="email"
-                  type="email"
                   value={formStateLogin.email}
                   onChange={handleChangeLogin}
                 />

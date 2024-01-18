@@ -8,7 +8,7 @@ const resolvers={
             return await User.find({}).populate('accounts').populate('password')
         },
         user:async(parent,{username})=>{
-            return await User.findOne({username}).populate('accounts').populate('password')
+            return await User.findOne({$or:[{username},{email:username}]}).populate('accounts').populate('password')
         },
         me:async(parent,args,context)=>{
             if(context.user){
@@ -25,7 +25,7 @@ const resolvers={
             return {user,token} // returns to token so it can be saved in the local storage im assuming
         },
         login: async (parent, { email, password }) => {
-    const user = await User.findOne({ email });
+  const user = await  User.findOne({$or:[{username:email},{email}]})
     if (!user) {
         throw AuthenticationError;
     }
