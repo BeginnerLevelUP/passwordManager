@@ -2,7 +2,6 @@ import genService from '../../../utils/genPassword'
 function PasswordStatus({userResults}){
 const userTest=genService.testUser(userResults);
 const strength=genService.strength(userTest)
-console.log(strength)
 return(
     <div>
         <h3>Strength : {strength.statusMessage}</h3>

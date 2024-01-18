@@ -28,9 +28,9 @@ class GenService{
     return defaultpassword
     }
 
-    genUserPsw(length, upper, lower, num, spec) {
-  if (!length || !upper || !lower || !num || !spec) {
-    return {};
+genUserPsw(length, upper, lower, num, spec) {
+  if (!length || (!upper && !lower && !num && !spec)) {
+    return this.getDefault();
   }
 
   const userPsw = generatePassword.generate({
@@ -42,7 +42,8 @@ class GenService{
   });
 
   return userPsw;
-    }
+}
+
 
     testUser(text){
       /*

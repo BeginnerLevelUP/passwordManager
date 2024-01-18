@@ -8,7 +8,7 @@ function GenPassword({onGen}){
     const [lower,isLower]=useState(true)
     const [num,isNum]=useState(true)
     const [spec,isSpec]=useState(true)
-
+    
     // State for Range
     const [length,setLength]=useState(50)
     const [range,setRange]=useState(false)
@@ -17,7 +17,7 @@ function GenPassword({onGen}){
     const [text,setText]=useState('')
 
     // Getting The variables needed 
-    const customPassword=genService.genUserPsw(length,upper,lower,num,spec)
+    const customPassword=genService.genUserPsw(length,upper,lower,num,spec,0)
     const defaultPassword = genService.getDefault();
 
     // Function that changes the state and keeps it modular
@@ -66,9 +66,11 @@ const onGenClick = () => {
         if(!defaultOptions){
             setText(customPassword)
             onGen(customPassword)
+            console.log(customPassword)
         }else{
         setText(defaultPassword)
         onGen(defaultPassword)
+
         }
 
 };
