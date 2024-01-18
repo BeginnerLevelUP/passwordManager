@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import { Form, Button,Modal } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { LOGIN, SIGNUP } from '../../../utils/mutations';
@@ -101,6 +100,12 @@ function LoginOrSignUp() {
     }
   };
 
+  // Visibility of password 
+const [viewPassword,setView]=useState('password')
+const onPasswordClick = () => {
+  const type = viewPassword === 'password' ? 'text' : 'password';
+  setView(type);
+};
   return (
     <>
       {/* Login modal */}
@@ -118,36 +123,45 @@ function LoginOrSignUp() {
                 <Link to="/">back to the homepage.</Link>
               </p>
             ) : (
-              <form onSubmit={handleFormSubmitLogin}>
-                <input
-                  className="form-input"
-                  placeholder="Your email or username"
-                  name="email"
-                  value={formStateLogin.email}
-                  onChange={handleChangeLogin}
-                />
+<Form onSubmit={handleFormSubmitLogin}>
+  <Form.Group controlId="formEmailOrUsername">
+    <Form.Control
+      type="text"
+      placeholder="Your email or username"
+      name="email"
+      value={formStateLogin.email}
+      onChange={handleChangeLogin}
+      className="form-input"
+    />
+  </Form.Group>
 
-                <input
-                  className="form-input"
-                  placeholder="******"
-                  name="password"
-                  type="password"
-                  value={formStateLogin.password}
-                  onChange={handleChangeLogin}
-                />
+  <Form.Group controlId="formPassword">
+    <Form.Control
+      type={viewPassword}
+      onClick={onPasswordClick}
+      placeholder="******"
+      name="password"
+      value={formStateLogin.password}
+      onChange={handleChangeLogin}
+      className="form-input"
+    />
+    <Form.Text className="text-muted" onClick={onPasswordClick}>
+      Click to View And Edit Password
+    </Form.Text>
+  </Form.Group>
 
-                <Modal.Footer>
-                  <Button variant="secondary" onClick={handleCloseLogin}>
-                    Cancel
-                  </Button>
-                  <Button type="submit" variant="primary" onClick={handleCloseLogin}>
-                    Login In
-                  </Button>
-                  <Button variant="success" onClick={handleShowSignup}>
-                    Sign Up
-                  </Button>
-                </Modal.Footer>
-              </form>
+  <Modal.Footer>
+    <Button variant="secondary" onClick={handleCloseLogin}>
+      Cancel
+    </Button>
+    <Button type="submit" variant="primary" onClick={handleCloseLogin}>
+      Login In
+    </Button>
+    <Button variant="success" onClick={handleShowSignup}>
+      Sign Up
+    </Button>
+  </Modal.Footer>
+</Form>
             )}
           </>
         </Modal.Body>
@@ -167,40 +181,57 @@ function LoginOrSignUp() {
             ) : (
               <>
                 <h1>SIGN UP</h1>
-                <form onSubmit={handleFormSubmitSignup}>
-                  <input
-                    className="form-input"
-                    placeholder="Your username"
-                    name="username"
-                    type="text"
-                    value={formStateSignup.username}
-                    onChange={handleChangeSignup}
-                  />
-                  <input
-                    className="form-input"
-                    placeholder="Your email"
-                    name="email"
-                    type="email"
-                    value={formStateSignup.email}
-                    onChange={handleChangeSignup}
-                  />
-                  <input
-                    className="form-input"
-                    placeholder="******"
-                    name="password"
-                    type="password"
-                    value={formStateSignup.password}
-                    onChange={handleChangeSignup}
-                  />
-                  <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseSignup}>
-                      Cancel
-                    </Button>
-                    <Button type="submit" variant="primary" onClick={handleCloseSignup}>
-                      Sign Up
-                    </Button>
-                  </Modal.Footer>
-                </form>
+<Form onSubmit={handleFormSubmitSignup}>
+  <Form.Group controlId="formUsername">
+    <Form.Control
+      type="text"
+      placeholder="Your username"
+      name="username"
+      value={formStateSignup.username}
+      onChange={handleChangeSignup}
+      className="form-input"
+    />
+  </Form.Group>
+
+  <Form.Group controlId="formEmail">
+    <Form.Control
+      type="email"
+      placeholder="Your email"
+      name="email"
+      value={formStateSignup.email}
+      onChange={handleChangeSignup}
+      className="form-input"
+    />
+  </Form.Group>
+
+  <Form.Group controlId="formPassword">
+    <Form.Control
+      type={viewPassword}
+      onClick={onPasswordClick}
+      placeholder="******"
+      name="password"
+      value={formStateSignup.password}
+      onChange={handleChangeSignup}
+      className="form-input"
+    />
+    <Form.Text className="text-muted" onClick={onPasswordClick}>
+      Click to View And Edit Password
+    </Form.Text>
+  </Form.Group>
+
+  <Button type="submit" variant="primary">
+    Generate Your Password With Us
+  </Button>
+
+  <Modal.Footer>
+    <Button variant="secondary" onClick={handleCloseSignup}>
+      Cancel
+    </Button>
+    <Button type="submit" variant="primary" onClick={handleCloseSignup}>
+      Sign Up
+    </Button>
+  </Modal.Footer>
+</Form>
               </>
             )}
           </>
