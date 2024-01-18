@@ -49,15 +49,22 @@ class GenService{
       in the two functions the state change would affect the generation of the password
       but now the generation of the password affects the state
       by using regex to test the text state(textArea) you can affect the checkboxes
-      and length should be pretty much the same 
+      and length so meet the minimum requirement of 8 characters
       */
 // All Character types in regex
-
+const lengthTest=()=>{
+  if(text.length<8){
+    return false
+  }else{
+    return true
+  }
+}
 return {
   upper: /[A-Z]/.test(text),
   lower: /[a-z]/.test(text),
   spec: /[!@#$%^&*()\-_+=\[\]{}|;:,.<>?]/.test(text),
-  num: /\d/.test(text)
+  num: /\d/.test(text),
+  length:lengthTest()
 }
 
     }
@@ -74,6 +81,14 @@ return {
       */
   let strength = 0;
   let status;
+let hint = [];
+  const lengthCheck=()=>{
+    if(!userResults.length){
+      return `Your Password Doesn't Have the Recommended Length`
+    }else{
+      return 'Met the Minimum Requirement'
+    }
+  }
 
   for (const property in userResults) {
     if (userResults.hasOwnProperty(property)) {
@@ -88,15 +103,27 @@ return {
     }
   }
 
+
   if (strength === 1 || strength === 0) {
     status = 'Bad';
+  hint.push(`Trying Including All Character Types`);
+  hint.push(lengthCheck());
   } else if (strength === 2 || strength === 3) {
-    status = 'Good';
+  hint.push(`Trying Including All Character Types`);
+  hint.push(lengthCheck());
   } else if(strength===4) {
-    status = 'Great';
+  hint.push(`Almost There`);
+  hint.push(lengthCheck());
+  }else{
+  hint.push(`Great Job`);
+  hint.push(lengthCheck());
   }
 
-  return { strength, status };
+  return { 
+    strength:strength,
+    statusMessage:status,
+    statusHint:hint
+   };
     }
 
 

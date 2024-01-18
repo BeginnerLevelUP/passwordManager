@@ -2,18 +2,16 @@ import genService from '../../../utils/genPassword'
 function PasswordStatus({userResults}){
 const userTest=genService.testUser(userResults);
 const strength=genService.strength(userTest)
-
+console.log(strength)
 return(
     <div>
-        <h3>Strength : {strength.status}</h3>
+        <h3>Strength : {strength.statusMessage}</h3>
         <div>
-            {/* good */}
-            {strength && strength.strength<4?(
-                <h4>Trying Icluding All Character Types</h4>
-            ):(
-                <h4>Great Job</h4>
-            )
-            }
+            <h4>Hints :</h4>
+            <ul>
+                <li>{strength.statusHint[0]}</li>
+                <li>{strength.statusHint[1]}</li>
+            </ul>
         </div>
     </div>
 )
