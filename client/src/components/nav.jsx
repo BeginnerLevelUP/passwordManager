@@ -23,6 +23,11 @@ function Nav() {
             </button>
           </Link>
 
+          <Link to='/me'>
+            <button>
+              Profile
+            </button>
+          </Link>
           <a onClick={logout} href='/'>
             Logout
           </a>

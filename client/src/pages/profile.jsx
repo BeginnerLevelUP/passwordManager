@@ -7,7 +7,7 @@ function ProfilePage() {
   const username = dataME?.me?.username || null;
   const email = dataME?.me?.email || null;
   const accounts = dataME?.me?.accounts || null;
-    console.log(accounts)
+
   if (loading) {
     return (
       <div>
@@ -19,20 +19,48 @@ function ProfilePage() {
   return (
     <>
       <div>
-        {!Auth.loggedIn ? (
+        {!Auth.loggedIn() ? (
           <h1>Must Be Logged In</h1>
         ) : (
           <>
             <h1>Hello {username}</h1>
             <h2>{email}</h2>
-            {accounts.map((account, index) => (
+            {accounts &&
+            accounts.map((account, index) => (
               <div key={index}>
-                <h3>Account {index}</h3>
-                <p>{account.created}</p>
-                <p>{account.username}</p>
-                <p>{account.email}</p>
-                <p>{account.websiteUrl}</p>
-                <p>{account.notes}</p>
+                <h3>Account :{index}</h3>
+                <p>Create On: {account.created}</p>
+                
+                <div>
+                  <p>Username :{account.username}</p>
+                  <img src='' alt='Edit Icon'></img>
+                </div>
+
+                <div>
+                  <p>Email :{account.email}</p>
+                  <img src='' alt='Edit Icon'></img>
+                </div>
+
+                <div>
+                  <p>Password:{account.password.text}</p>
+                  <img src='' alt='Edit Icon'></img>
+                </div>
+
+                <div>
+                   <p>Website Url:{account.websiteUrl}</p>
+                  <img src='' alt='Edit Icon'></img>
+                </div>
+
+                <div>
+                   <p>Note:{account.notes}</p>
+                  <img src='' alt='Edit Icon'></img>
+                </div>
+
+                
+                
+                
+               
+               
               </div>
             ))}
           </>

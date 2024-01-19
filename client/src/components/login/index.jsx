@@ -169,7 +169,7 @@ const onPasswordClick = () => {
       Cancel
     </Button>
     <Button type="submit" variant="primary" onClick={handleCloseLogin}>
-      Login In
+      Login
     </Button>
     <Button variant="success" onClick={handleShowSignup}>
       Sign Up
