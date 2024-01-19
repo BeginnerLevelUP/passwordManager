@@ -1,6 +1,7 @@
 import { useState } from "react"
 import genService from "../../../utils/genPassword"
-function GenPassword({onGen}){
+import Dropdown from 'react-bootstrap/Dropdown';
+function GenPassword({onGen,forSignUp}){
     
 
     // States for the Checkboxes
@@ -10,7 +11,7 @@ function GenPassword({onGen}){
     const [spec,isSpec]=useState(true)
     
     // State for Range
-    const [length,setLength]=useState(50)
+    const [length,setLength]=useState(8)
     const [range,setRange]=useState(false)
     
     //State for Textarea
@@ -56,6 +57,7 @@ function GenPassword({onGen}){
 
 
 const onGenClick = () => {
+  
     setRange(true)
       const defaultOptions =
         upper === true &&
@@ -66,7 +68,6 @@ const onGenClick = () => {
         if(!defaultOptions){
             setText(customPassword)
             onGen(customPassword)
-            console.log(customPassword)
         }else{
         setText(defaultPassword)
         onGen(defaultPassword)
@@ -74,123 +75,176 @@ const onGenClick = () => {
         }
 
 };
-    return(
+
+  return (
+    <>
+      {!forSignUp ? (
         <>
-        
-        {/* TextArea where user can type or generate password */}
-        <div className="textareaDiv">
-        <label htmlFor="textInput">
-            Password
-        </label>
-        <textarea 
-        id='textInput'
-        rows={10}
-        cols={100}
-        value={text}
-        onChange={onTextareaChange}
-        onClick={onTextAreaClick}
-        placeholder={`
-        Click Generate Button to get a password based on the cretiera below
-                                     Orr
-        Type your password and have the validity checked 
-        `}
-        ></textarea>
-        </div>
+          {/* TextArea where user can type or generate password */}
+          <div className="textareaDiv">
+            <label htmlFor="textInput">Password</label>
+            <textarea
+              id="textInput"
+              rows={10}
+              cols={100}
+              value={text}
+              onChange={onTextareaChange}
+              onClick={onTextAreaClick}
+              placeholder={`Click Generate Button to get a password based on the criteria below Orr Type your password and have the validity checked `}
+            ></textarea>
+          </div>
 
-
-
-        {/* CheckBoxes to Speicify Password*/}
-        <div className="checkboxContainer">
-
-            <div className="checkboxDiv" >
-                
-                <label htmlFor="uppercase">
-                    Uppercase
-                </label>
-
-                <input
-                id='uppercase'
-                type='checkbox'
+          {/* CheckBoxes to Specify Password */}
+          <div className="checkboxContainer">
+            <div className="checkboxDiv">
+              <label htmlFor="uppercase">Uppercase</label>
+              <input
+                id="uppercase"
+                type="checkbox"
                 checked={upper}
-                onChange={()=>{onCheckboxChange(upper,isUpper)}}
-                ></input>
-            </div>
-
-             <div className="checkboxDiv" >
-                 <label htmlFor="lowercase">
-                    Lowercase
-                </label>
-
-                <input
-                id='lowercase'
-                type='checkbox'
-                checked={lower}
-                onChange={()=>{onCheckboxChange(lower,isLower)}}
-                //checked or onchange??
-                ></input>          
-            </div>
-
-            <div className="checkboxDiv" >
-                 <label htmlFor="numbers">
-                    Numbers
-                </label>
-
-                <input
-                id='numbers'
-                type='checkbox'
-                checked={num}
-                onChange={()=>{onCheckboxChange(num,isNum)}}
-                ></input>      
+                onChange={() => {
+                  onCheckboxChange(upper, isUpper);
+                }}
+              ></input>
             </div>
 
             <div className="checkboxDiv">
-                 <label htmlFor="specialCharacters">
-                    Special Characters
-                </label>
-
-                <input
-                 id='specialCharacters'
-                type='checkbox'
-                checked={spec}
-                onChange={()=>{onCheckboxChange(spec,isSpec)}}
-                ></input>         
+              <label htmlFor="lowercase">Lowercase</label>
+              <input
+                id="lowercase"
+                type="checkbox"
+                checked={lower}
+                onChange={() => {
+                  onCheckboxChange(lower, isLower);
+                }}
+              ></input>
             </div>
 
+            <div className="checkboxDiv">
+              <label htmlFor="numbers">Numbers</label>
+              <input
+                id="numbers"
+                type="checkbox"
+                checked={num}
+                onChange={() => {
+                  onCheckboxChange(num, isNum);
+                }}
+              ></input>
+            </div>
 
-        </div>
+            <div className="checkboxDiv">
+              <label htmlFor="specialCharacters">Special Characters</label>
+              <input
+                id="specialCharacters"
+                type="checkbox"
+                checked={spec}
+                onChange={() => {
+                  onCheckboxChange(spec, isSpec);
+                }}
+              ></input>
+            </div>
+          </div>
 
-  { /* Range for Length */ }
-{range ? (
-  <div className="rangeDiv">
-    <label htmlFor="pwdLength">
-      Length : {length}
-    </label>
-    <input
-      id='pwdLength'
-      type='range'
-      min={0}
-      max={200}
-      value={length}
-      onChange={onRangeChange}
-    ></input>
-  </div>
-) : (
-  <div className="rangeDiv">
-    <label htmlFor="pwdLength">
-      Length : {length}
-    </label>
-  </div>
-)}
+          {/* Range for Length */}
+          {range ? (
+            <div className="rangeDiv">
+              <label htmlFor="pwdLength">Length : {length}</label>
+              <input
+                id="pwdLength"
+                type="range"
+                min={8}
+                max={200}
+                value={length}
+                onChange={onRangeChange}
+              ></input>
+            </div>
+          ) : (
+            <div className="rangeDiv">
+              <label htmlFor="pwdLength">Length : {length}</label>
+            </div>
+          )}
 
+          {/* Button To Generate */}
+          <button onClick={onGenClick}>Generate Password</button>
+        </>
+      ) : (
+<>
+<Dropdown>
+      <Dropdown.Toggle variant="success" id="dropdown-basic">
+       Generate Your Password With Us
+      </Dropdown.Toggle>
 
+      <Dropdown.Menu>
+   <div className="checkboxContainer">
+            <div className="checkboxDiv">
+              <label htmlFor="uppercase">Uppercase</label>
+              <input
+                id="uppercase"
+                type="checkbox"
+                checked={upper}
+                onChange={() => {
+                  onCheckboxChange(upper, isUpper);
+                }}
+              ></input>
+            </div>
 
-        {/* Button To Generate */}
-            <button onClick={onGenClick}>Generate Password</button>
+            <div className="checkboxDiv">
+              <label htmlFor="lowercase">Lowercase</label>
+              <input
+                id="lowercase"
+                type="checkbox"
+                checked={lower}
+                onChange={() => {
+                  onCheckboxChange(lower, isLower);
+                }}
+              ></input>
+            </div>
 
+            <div className="checkboxDiv">
+              <label htmlFor="numbers">Numbers</label>
+              <input
+                id="numbers"
+                type="checkbox"
+                checked={num}
+                onChange={() => {
+                  onCheckboxChange(num, isNum);
+                }}
+              ></input>
+            </div>
 
-        
+            <div className="checkboxDiv">
+              <label htmlFor="specialCharacters">Special Characters</label>
+              <input
+                id="specialCharacters"
+                type="checkbox"
+                checked={spec}
+                onChange={() => {
+                  onCheckboxChange(spec, isSpec);
+                }}
+              ></input>
+            </div>
+          </div>
+          
+           <div className="rangeDiv">
+              <label htmlFor="pwdLength">Length : {length}</label>
+              <input
+                id="pwdLength"
+                type="range"
+                min={8}
+                max={200}
+                value={length}
+                onChange={onRangeChange}
+              ></input>
+            </div>
+        <Dropdown.Item onClick={onGenClick} >Generate Password</Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
+       
+
+</>
+      )}
     </>
-    )
+  );
 }
 
 export default GenPassword

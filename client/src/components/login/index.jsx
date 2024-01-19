@@ -4,8 +4,11 @@ import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { LOGIN, SIGNUP } from '../../../utils/mutations';
 import Auth from '../../../utils/auth';
+import GenPassword from '../genPassword';
 
 function LoginOrSignUp() {
+  //For Props
+  const [password,setPassword]=useState('')
   // Login State
   const [showLogin, setShowLogin] = useState(false);
   // Signup State
@@ -32,7 +35,10 @@ function LoginOrSignUp() {
     setShowLogin(true);
     setShowSignup(false);
   };
-
+  //Passing Props Event Listener
+  const onGen=(password)=>{
+    setPassword(password)
+  }
   // Signup Event Listener
   const handleCloseSignup = () => {
     setShowSignup(false);
@@ -74,15 +80,23 @@ function LoginOrSignUp() {
     });
   };
 
-  // Signup Event Listeners
-  const handleChangeSignup = (event) => {
-    const { name, value } = event.target;
+// Signup Event Listeners
+const handleChangeSignup = (event) => {
+  const { name, value } = event.target;
 
-    setFormStateSignup({
-      ...formStateSignup,
-      [name]: value,
-    });
-  };
+  setFormStateSignup((prevState) => ({
+    ...prevState,
+    [name]: value,
+  }));
+
+  if(name==='password'){
+ onGen(value);
+  }
+    
+ 
+  
+};
+
 
   const handleFormSubmitSignup = async (event) => {
     event.preventDefault();
@@ -210,7 +224,7 @@ const onPasswordClick = () => {
       onClick={onPasswordClick}
       placeholder="******"
       name="password"
-      value={formStateSignup.password}
+      value={password}
       onChange={handleChangeSignup}
       className="form-input"
     />
@@ -219,9 +233,7 @@ const onPasswordClick = () => {
     </Form.Text>
   </Form.Group>
 
-  <Button type="submit" variant="primary">
-    Generate Your Password With Us
-  </Button>
+      <GenPassword onGen={onGen}  forSignUp={true}></GenPassword>
 
   <Modal.Footer>
     <Button variant="secondary" onClick={handleCloseSignup}>

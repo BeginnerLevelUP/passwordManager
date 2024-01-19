@@ -22,7 +22,7 @@ function HomePage() {
 
   return (
     <>
-      <GenPassword onGen={onGen}></GenPassword>
+      <GenPassword onGen={onGen} forSignUp={false}></GenPassword>
       {!Auth.loggedIn() ? (
         <>
           <button onClick={onSaveClick} className="mb-2">

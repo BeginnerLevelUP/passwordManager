@@ -18,7 +18,7 @@ class GenService{
 // 2)Uses all character types
 // */
     const defaultpassword = generatePassword.generate({
-    length: 50,
+    length: 8,
     numbers: true,
     symbols: true,
     uppercase: true,
