@@ -28,6 +28,7 @@ function ProfilePage() {
             {accounts.map((account, index) => (
               <div key={index}>
                 <h3>Account {index}</h3>
+                <p>{account.created}</p>
                 <p>{account.username}</p>
                 <p>{account.email}</p>
                 <p>{account.websiteUrl}</p>

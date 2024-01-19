@@ -30,7 +30,7 @@ mutation Mutation($passwordText: String!, $currentUsername: String!, $username: 
     email
     websiteUrl
     notes
-    create
+    created
     password {
       _id
       text

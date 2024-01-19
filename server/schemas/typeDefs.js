@@ -13,7 +13,7 @@ type Account{
     email:String
     websiteUrl:String
     notes:String
-    create:String
+    created:String
     password:Password
 }
 
@@ -36,6 +36,7 @@ type Query{
 users:[User]
 user(username:String!):User
 me:User
+accounts(_id:ID!):Account
 }
 
 type Mutation{

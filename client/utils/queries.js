@@ -21,7 +21,16 @@ query Me {
       email
       websiteUrl
       notes
-      create
+      created
+            password{
+    _id
+    text
+    length
+    uppercase
+    lowercase
+    number
+    specialCharacter
+      }
     }
   }
 }

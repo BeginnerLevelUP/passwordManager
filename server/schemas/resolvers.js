@@ -5,16 +5,36 @@ const { signToken, AuthenticationError } = require('../utils/auth');
 const resolvers={
     Query:{
         users:async(parent)=>{
-            return await User.find({}).populate('accounts').populate('password')
+            return await User.find({}).populate(
+         {  path: 'accounts',
+            populate:{
+                path:'password'
+            } })
+            .populate('password')
         },
         user:async(parent,{username})=>{
-            return await User.findOne({$or:[{username},{email:username}]}).populate('accounts').populate('password')
+            return await User.findOne({$or:[{username},{email:username}]}).populate(
+         {  path: 'accounts',
+            populate:{
+                path:'password'
+            } })
+            .populate('password')
         },
         me:async(parent,args,context)=>{
             if(context.user){
-                return await User.findOne({_id:context.user._id}).populate('accounts')
+                return await User.findOne({_id:context.user._id}).populate(
+         {  path: 'accounts',
+            populate:{
+                path:'password'
+            } })
+            .populate('password')
             }
             throw AuthenticationError
+        },
+        accounts:async(parent,{_id})=>{
+            // populate the newAccount 
+            const populatedNewAccount=await Account.findById(_id).populate('password')
+            return populatedNewAccount
         }
     },
     Mutation:{
