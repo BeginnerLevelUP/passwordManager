@@ -11,7 +11,8 @@ function SavePassword({Password}){
 const [addAccount,{error,data}]=useMutation(ADD_ACCOUNT)
   //Query
 const { loading, data: dataME } = useQuery(QUERY_ME);
-const username = null || dataME?.me?.username  ;
+const username =  dataME?.me?.username || null  ;
+console.log(dataME)
 
   // For Modal 
   const [show, setShow] = useState(false);

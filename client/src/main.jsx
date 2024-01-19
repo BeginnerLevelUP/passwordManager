@@ -8,6 +8,7 @@ import './index.css'
 
 
 import HomePage from './pages/home.jsx';
+import ProfilePage from './pages/profile.jsx';
 import ErrorPage from './pages/error.jsx';
 
 const router=createBrowserRouter([
@@ -20,6 +21,10 @@ const router=createBrowserRouter([
         index:true,
         element:<HomePage></HomePage>
       },
+      {
+        path:'/me',
+        element:<ProfilePage></ProfilePage>
+      }
 
     ]
   }
