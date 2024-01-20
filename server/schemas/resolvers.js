@@ -148,15 +148,19 @@ const resolvers={
             ).populate('password')
         }
 
-        if(passwordText){
-            const currentAccount= await Account.findOne({_id:currentAccountId}).populate('password')
-            const passwordId=currentAccount.password._id
-            const currentPassword=await Password.findOneAndUpdate(
-                {_id:passwordId},
-                {$set:{text:passwordText}},
-                )
-            return currentAccount
-        }
+if (passwordText) {
+    const currentAccount = await Account.findOne({ _id: currentAccountId }).populate('password');
+    const passwordId = currentAccount.password._id;
+    
+    const currentPassword = await Password.findOne({ _id: passwordId });
+
+    currentPassword.text = passwordText;
+
+    await currentPassword.save();
+
+    return currentAccount;
+}
+
 
     } catch (error) {
         console.error(error);
