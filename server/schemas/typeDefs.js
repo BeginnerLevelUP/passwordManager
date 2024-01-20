@@ -42,7 +42,8 @@ accounts(_id:ID!):Account
 type Mutation{
     signup(username:String!,email:String!,password:String!):Auth
     login(email:String!,password:String!):Auth
-     addNewAccount(passwordText:String!,username:String,email:String,websiteUrl:String,notes:String,currentUsername:String!):Account
+    addNewAccount(passwordText:String!,username:String,email:String,websiteUrl:String,notes:String,currentUsername:String!):Account
+    updateUserAccount(passwordText:String,username:String,email:String,websiteUrl:String,notes:String,currentAccountId:ID!):Account
 }
 `
 

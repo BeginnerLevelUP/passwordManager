@@ -29,7 +29,7 @@ const passwordSchema=new Schema({
 })
 // Middleware to runs before the saving to the database 
 passwordSchema.pre('save', async function (next) {
-    if (this.isNew || this.isModified('text')) {
+    if (this.isModified('text') || this.isNew ) {
         // Use regex to check for uppercase, lowercase, numbers, and special characters
         const regexUppercase = /[A-Z]/;
         const regexLowercase = /[a-z]/;

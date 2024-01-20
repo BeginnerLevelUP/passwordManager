@@ -111,8 +111,60 @@ const resolvers={
                 console.error(e)
             }
 
+        },
+        updateUserAccount : async (parent, { passwordText, username, email, websiteUrl, notes, currentAccountId }) => {
+    try {
+        // Find the current account
+
+        if (username) {
+           return await Account.findOneAndUpdate(
+                { _id: currentAccountId },
+                { $set: { username } },
+                { new: true }
+            ).populate('password')
         }
+
+        if (email) {
+                return await Account.findOneAndUpdate(
+                { _id: currentAccountId },
+                { $set: { email} },
+                { new: true }
+            ).populate('password')
         }
+
+        if (websiteUrl) {
+           return await Account.findOneAndUpdate(
+                { _id: currentAccountId },
+                { $set: { websiteUrl} },
+                { new: true }
+            ).populate('password')
+        }
+
+        if (notes) {
+           return await Account.findOneAndUpdate(
+                { _id: currentAccountId },
+                { $set: { notes} },
+                { new: true }
+            ).populate('password')
+        }
+
+        if(passwordText){
+            const currentAccount= await Account.findOne({_id:currentAccountId}).populate('password')
+            const passwordId=currentAccount.password._id
+            const currentPassword=await Password.findOneAndUpdate(
+                {_id:passwordId},
+                {$set:{text:passwordText}},
+                )
+            return currentAccount
+        }
+
+    } catch (error) {
+        console.error(error);
+        throw new Error("Error updating account");
+    }
+        }
+
+    }
 }
 
 module.exports=resolvers
