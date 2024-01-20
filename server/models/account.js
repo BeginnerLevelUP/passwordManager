@@ -29,8 +29,25 @@ created:{
     type:Date,
     default:Date.now(),
     get: (timestamp) => dateFormat(timestamp), //modifies the data whenever it is retrived 
+},
+updated:{
+    type:Date,
+    default:Date.now(),
+    get: (timestamp) => dateFormat(timestamp), //modifies the data whenever it is retrived  
 }
 })
+
+
+// Middleware to update the 'updated' field before saving the document
+
+accountSchema.pre('save', function (next) {
+  if (this.isModified('username') || this.isModified('email') || this.isModified('password') || this.isModified('websiteUrl') || this.isModified('notes') || this.isNew) {
+    this.updated = Date.now();
+  }
+  next();
+});
+
+
 
 
 const Account = model('Account', accountSchema);

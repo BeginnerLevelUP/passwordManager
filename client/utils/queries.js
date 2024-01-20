@@ -22,6 +22,7 @@ query Me {
       websiteUrl
       notes
       created
+          updated
             password{
     _id
     text

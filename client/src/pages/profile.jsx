@@ -94,6 +94,7 @@ function ProfilePage() {
                   <div>
                     <h3>Account: {index}</h3>
                     <p>Create On: {account.created}</p>
+                    <p>Updated On: {account.updated}</p>
                     <img
                       src=''
                       alt='Edit Icon'

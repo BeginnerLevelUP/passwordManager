@@ -31,6 +31,7 @@ mutation Mutation($passwordText: String!, $currentUsername: String!, $username: 
     websiteUrl
     notes
     created
+        updated
     password {
       _id
       text
@@ -53,6 +54,7 @@ mutation UpdateUserAccount($currentAccountId: ID!, $passwordText: String, $usern
     websiteUrl
     notes
     created
+        updated
     password {
       _id
       text

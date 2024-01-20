@@ -127,15 +127,15 @@ if (passwordText!==passwordText) {
 
     return currentAccount;
 }
-
-           return await Account.findOneAndUpdate(
+const currentAccount =await Account.findOneAndUpdate(
                 { _id: currentAccountId },
                 { $set: { username,email,websiteUrl,notes,passwordText } },
                 { new: true }
             ).populate('password')
+currentAccount.updated=Date.now()
+            await currentAccount.save()
 
-
-
+    return currentAccount
 
     } catch (error) {
         console.error(error);

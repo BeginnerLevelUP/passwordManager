@@ -14,6 +14,7 @@ type Account{
     websiteUrl:String
     notes:String
     created:String
+    updated:String
     password:Password
 }
 
