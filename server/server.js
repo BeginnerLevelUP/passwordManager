@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require('express'); // To run the server
 const { ApolloServer } = require('@apollo/server'); // To interacted with apollo server
 const { expressMiddleware } = require('@apollo/server/express4');
