@@ -43,3 +43,25 @@ mutation Mutation($passwordText: String!, $currentUsername: String!, $username: 
   }
 }
 `
+
+export const UPDATE_USER_ACCOUNT=gql`
+mutation UpdateUserAccount($currentAccountId: ID!, $passwordText: String, $username: String, $email: String, $websiteUrl: String, $notes: String) {
+  updateUserAccount(currentAccountId: $currentAccountId, passwordText: $passwordText, username: $username, email: $email, websiteUrl: $websiteUrl, notes: $notes) {
+    _id
+    username
+    email
+    websiteUrl
+    notes
+    created
+    password {
+      _id
+      text
+      length
+      uppercase
+      lowercase
+      number
+      specialCharacter
+    }
+  }
+}
+`

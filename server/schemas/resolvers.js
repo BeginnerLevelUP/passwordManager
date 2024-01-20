@@ -115,40 +115,7 @@ const resolvers={
         updateUserAccount : async (parent, { passwordText, username, email, websiteUrl, notes, currentAccountId }) => {
     try {
         // Find the current account
-
-        if (username) {
-           return await Account.findOneAndUpdate(
-                { _id: currentAccountId },
-                { $set: { username } },
-                { new: true }
-            ).populate('password')
-        }
-
-        if (email) {
-                return await Account.findOneAndUpdate(
-                { _id: currentAccountId },
-                { $set: { email} },
-                { new: true }
-            ).populate('password')
-        }
-
-        if (websiteUrl) {
-           return await Account.findOneAndUpdate(
-                { _id: currentAccountId },
-                { $set: { websiteUrl} },
-                { new: true }
-            ).populate('password')
-        }
-
-        if (notes) {
-           return await Account.findOneAndUpdate(
-                { _id: currentAccountId },
-                { $set: { notes} },
-                { new: true }
-            ).populate('password')
-        }
-
-if (passwordText) {
+if (passwordText!==passwordText) {
     const currentAccount = await Account.findOne({ _id: currentAccountId }).populate('password');
     const passwordId = currentAccount.password._id;
     
@@ -161,6 +128,14 @@ if (passwordText) {
     return currentAccount;
 }
 
+           return await Account.findOneAndUpdate(
+                { _id: currentAccountId },
+                { $set: { username,email,websiteUrl,notes,passwordText } },
+                { new: true }
+            ).populate('password')
+
+
+
 
     } catch (error) {
         console.error(error);
@@ -172,3 +147,4 @@ if (passwordText) {
 }
 
 module.exports=resolvers
+
