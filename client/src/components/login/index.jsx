@@ -137,7 +137,7 @@ const onPasswordClick = () => {
                 <Link to="/">back to the homepage.</Link>
               </p>
             ) : (
-<Form onSubmit={handleFormSubmitLogin}>
+<Form onSubmit={handleFormSubmitLogin} id='loginForm'>
   <Form.Group controlId="formEmailOrUsername">
     <Form.Control
       type="text"
@@ -195,7 +195,7 @@ const onPasswordClick = () => {
             ) : (
               <>
                 <h1>SIGN UP</h1>
-<Form onSubmit={handleFormSubmitSignup}>
+<Form onSubmit={handleFormSubmitSignup} id='signupForm'>
   <Form.Group controlId="formUsername">
     <Form.Control
       type="text"
