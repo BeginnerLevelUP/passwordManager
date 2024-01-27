@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require('express'); // To run the server
+const cors = require('cors');
 const { ApolloServer } = require('@apollo/server'); // To interacted with apollo server
 const { expressMiddleware } = require('@apollo/server/express4');
 const path = require('path');
@@ -20,7 +21,7 @@ const server = new ApolloServer({//passing in your typedefs and resolvers so it 
 // Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async () => {
     await server.start(); // waits for server to start
-
+    app.use(cors());
     app.use(express.urlencoded({ extended: false }));
     app.use(express.json());
     // ????
