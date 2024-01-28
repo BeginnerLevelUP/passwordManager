@@ -1,32 +1,37 @@
 import Auth from "../../utils/auth";
-import { useQuery,useMutation } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_ME } from "../../utils/queries";
-import { UPDATE_USER_ACCOUNT } from "../../utils/mutations";
-import { useState} from "react";
-import {Navigate} from "react-router-dom"
-function ProfilePage() {
-  //Mutations and Queries
-  const { loading, data: dataME } = useQuery(QUERY_ME);
-  const [updateAccount,{error:errorUpdate,data:dataUpdate}]=useMutation(UPDATE_USER_ACCOUNT)
+import { UPDATE_USER_ACCOUNT, VIEW_PASSWORD, DELETE_USER_ACCOUNT } from "../../utils/mutations";
+import { useState } from "react";
+import { Navigate } from "react-router-dom";
 
-  //State
-  const [edit,setEdit]=useState({
-    edit:false,
-    index:null
-  })
- 
-    const [formValues, setFormValues] = useState({
+function ProfilePage() {
+  // Mutations and Queries
+  const { loading: loadingME, data: dataME } = useQuery(QUERY_ME);
+  // Query Me
+  const username = dataME?.me?.username || null;
+  const email = dataME?.me?.email || null;
+  const accounts = dataME?.me?.accounts || null;
+
+  const [updateAccount, { error: errorUpdate, data: dataUpdate }] = useMutation(UPDATE_USER_ACCOUNT);
+  const [viewPassword, { error: errorPassword, data: dataPassword }] = useMutation(VIEW_PASSWORD);
+  const [deleteAccount, { error: errorDelete, data: dataDelete }] = useMutation(DELETE_USER_ACCOUNT);
+
+  // State
+  const [edit, setEdit] = useState({
+    edit: false,
+    index: null,
+  });
+
+  const [view, setView] = useState(false);
+
+  const [formValues, setFormValues] = useState({
     username: '',
     email: '',
     passwordText: '',
     websiteUrl: '',
     notes: '',
   });
-
-  //Query Me
-  const username = dataME?.me?.username || null;
-  const email = dataME?.me?.email || null;
-  const accounts = dataME?.me?.accounts || null;
 
   const onClickEdit = (index) => {
     setEdit({
@@ -39,12 +44,10 @@ function ProfilePage() {
     setFormValues({
       username: selectedAccount.username || '',
       email: selectedAccount.email || '',
-      passwordText: selectedAccount.password.text || '',
+      passwordText: '',
       websiteUrl: selectedAccount.websiteUrl || '',
       notes: selectedAccount.notes || '',
     });
-
-    console.log(formValues)
   };
 
   const onInputChange = (e) => {
@@ -55,23 +58,39 @@ function ProfilePage() {
     });
   };
 
+  const onViewClick = async (id) => {
+    const { data } = await viewPassword({
+      variables: {
+        accountId: id,
+      },
+    });
+    setView(!view);
+  };
 
   const onEditFormSubmit = async (currentAccountId) => {
-    const {data}=await updateAccount({
-      variables:{
+    const { data } = await updateAccount({
+      variables: {
         currentAccountId,
-        ...formValues
+        ...formValues,
       },
-      refetchQueries:(QUERY_ME)
-    })
+      refetchQueries: [{ query: QUERY_ME }],
+    });
     setEdit({
       edit: false,
       index: null,
     });
-    window.location.reload()
-  }
 
-  if (loading) {
+    window.location.reload();
+  };
+
+  const onDeleteClick = async (accountId) => {
+    const { data } = await deleteAccount({
+      variables: { accountId },
+      refetchQueries: [{ query: QUERY_ME }],
+    });
+  };
+
+  if (loadingME) {
     return (
       <div>
         <p>Loading...</p>
@@ -88,29 +107,39 @@ function ProfilePage() {
           <>
             <h1>Hello {username}</h1>
             <h2>{email}</h2>
- {accounts &&
+            {accounts && accounts.length > 0 ? (
+              // Display account details if there are accounts
               accounts.map((account, index) => (
-                <div key={index} >
+                <div key={index}>
                   <div>
                     <h3>Account: {index}</h3>
                     <p>Create On: {account.created}</p>
                     <p>Updated On: {account.updated}</p>
                     <img
-                      src=''
+                      src='' 
                       alt='Edit Icon'
                       onClick={() => {
                         onClickEdit(index);
+                      }}
+                    />
+                    <img
+                      src='' 
+                      alt='Delete Icon'
+                      onClick={() => {
+                        onDeleteClick(account._id);
                       }}
                     />
                   </div>
                   {edit.edit && edit.index === index ? (
                     // Display edit form only for the selected account
                     <>
-                   <form onSubmit={()=>{
-                    onEditFormSubmit(account._id)
-                   }}>
-
-                                         <input
+                      <form
+                        onSubmit={() => {
+                          onEditFormSubmit(account._id);
+                        }}
+                      >
+                        {/* Replace with your input fields */}
+                        <input
                           type='text'
                           name='username'
                           placeholder='Username'
@@ -128,9 +157,9 @@ function ProfilePage() {
 
                         <input
                           type='text'
-                          name='password'
+                          name='passwordText'
                           placeholder='Password'
-                          value={formValues.password}
+                          value={formValues.passwordText}
                           onChange={onInputChange}
                         />
 
@@ -150,25 +179,36 @@ function ProfilePage() {
                           onChange={onInputChange}
                         />
 
-                  <button type="submit">Submit</button>
-                  </form>
+                        <button type="submit">Submit</button>
+                        <button onClick={() => { setEdit({ edit: false, index: null }); }}>Cancel</button>
+                      </form>
                     </>
                   ) : (
                     // Display account details
                     <>
-                     <p>Username: {account.username}</p>
-                <p>Email : {account.email}</p>
-                <p>Password: {account.password.text}</p>
-                <p>Website Url: {account.websiteUrl}</p>
-                <p>Notes: {account.notes}</p>
+                      <p>Username: {account.username}</p>
+                      <p>Email: {account.email}</p>
+                      {!view ? (
+                        <p>Password (Encrypted): {account.password.text.substring(0, 10)}.....</p>
+                      ) : (
+                        <p>Password: {account.password.text}</p>
+                      )}
+                      <img onClick={() => { onViewClick(account._id); }} src='' alt='eye icon' />
+                      <p>Website Url: {account.websiteUrl}</p>
+                      <p>Notes: {account.notes}</p>
                     </>
                   )}
                 </div>
-              ))}
+              ))
+            ) : (
+              // Display a message if there are no accounts
+              <h1>No passwords saved</h1>
+            )}
           </>
         )}
       </div>
     </>
-  );}
+  );
+}
 
 export default ProfilePage;

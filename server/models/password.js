@@ -1,6 +1,7 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
-
+const Cryptr = require('cryptr');    
+ const cryptr = new Cryptr(process.env.CRYPTR_KEY);
 const passwordSchema=new Schema({
     text:{
         type:String,
@@ -27,9 +28,14 @@ const passwordSchema=new Schema({
         enum:['bad','good','great']
     }
 })
-// Middleware to runs before the saving to the database 
-passwordSchema.pre('save', async function (next) {
-    if (this.isModified('text') || this.isNew ) {
+
+
+passwordSchema.methods.isCorrectPassword = async function (password) {
+    return bcrypt.compare(password, this.text);
+    // adds a method to the usershcma to compare passwords for later use
+};
+passwordSchema.methods.strengthTest=async function(password){
+            if (this.isModified('text') || this.isNew ) {
         // Use regex to check for uppercase, lowercase, numbers, and special characters
         const regexUppercase = /[A-Z]/;
         const regexLowercase = /[a-z]/;
@@ -62,19 +68,31 @@ passwordSchema.pre('save', async function (next) {
             this.strength = 'bad';
         }
 
-        // Hash the
-        const saltRounds = 10; // the amount hash rounds 
-       this.text = await bcrypt.hash(this.text, saltRounds);
+
 
     }
-
-    next(); //moves on
-});
-
-passwordSchema.methods.isCorrectPassword = async function (password) {
-    return bcrypt.compare(password, this.text);
-    // adds a method to the usershcma to compare passwords for later use
+}
+passwordSchema.methods.hashNativePassword = async function (password) {
+    await this.strengthTest(); // Call strengthTest before modifying this.text
+    const saltRounds = 10;
+    this.text = await bcrypt.hash(this.text, saltRounds);
 };
+
+
+passwordSchema.methods.encryptExternalPassword = async function () {
+    await this.strengthTest(); // Call strengthTest before modifying this.text
+    this.text = cryptr.encrypt(this.text);
+};
+
+passwordSchema.methods.viewPassword = async function () {
+    // Decrypt the password
+    this.text = cryptr.decrypt(this.text);
+    setTimeout(async () => {
+        await this.encryptExternalPassword();
+        await this.save();
+    }, 5000);
+};
+
 
 // could create another feild that says strength and add a checker in the .pre and make it similar to the 
 // rarity thing in the trading card app

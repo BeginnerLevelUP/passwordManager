@@ -35,14 +35,22 @@ const resolvers={
             // populate the newAccount 
             const populatedNewAccount=await Account.findById(_id).populate('password')
             return populatedNewAccount
-        }
+        },
     },
     Mutation:{
         signup:async(parent,{username,email,password})=>{
-            const newPassword=await Password.create({text:password})
-            const user= await User.create({username,email,password:newPassword._id})
-            const token=signToken(user) // based on the parameters back in the auth file (the _id will be automatically added)
-            return {user,token} // returns to token so it can be saved in the local storage im assuming
+    try {
+        const newPasswordInstance = new Password({ text: password });
+        await newPasswordInstance.hashNativePassword();
+        const newPassword = await newPasswordInstance.save();
+
+        const newUser = await User.create({ username, email, password: newPassword._id });
+        const token = signToken(newUser);
+        return { user: newUser, token };
+    } catch (error) {
+        console.error(error);
+        throw new Error('Error creating user');
+    }
         },
         login: async (parent, { email, password }) => {
   const user = await  User.findOne({$or:[{username:email},{email}]})
@@ -75,8 +83,9 @@ const resolvers={
             /*
             create a new password
             */
-            const newPassword=await Password.create({text:passwordText})
-
+            const newPasswordInstance=new Password({text:passwordText})
+            await newPasswordInstance.encryptExternalPassword()
+            const newPassword=await newPasswordInstance.save()
             /*
             create a new account document to store the password 
             if the user doesnt want to tie and account to their saved password the fields are optional
@@ -115,24 +124,19 @@ const resolvers={
         updateUserAccount : async (parent, { passwordText, username, email, websiteUrl, notes, currentAccountId }) => {
     try {
         // Find the current account
-if (passwordText!==passwordText) {
-    const currentAccount = await Account.findOne({ _id: currentAccountId }).populate('password');
-    const passwordId = currentAccount.password._id;
-    
-    const currentPassword = await Password.findOne({ _id: passwordId });
 
-    currentPassword.text = passwordText;
-
-    await currentPassword.save();
-
-    return currentAccount;
-}
 const currentAccount =await Account.findOneAndUpdate(
                 { _id: currentAccountId },
                 { $set: { username,email,websiteUrl,notes,passwordText } },
                 { new: true }
             ).populate('password')
 currentAccount.updated=Date.now()
+ const passwordId = currentAccount.password._id;
+    const currentPassword = await Password.findOne({ _id: passwordId });
+
+    currentPassword.text = passwordText;
+    await currentPassword.encryptExternalPassword()
+    await currentPassword.save();
             await currentAccount.save()
 
     return currentAccount
@@ -141,8 +145,43 @@ currentAccount.updated=Date.now()
         console.error(error);
         throw new Error("Error updating account");
     }
-        }
+        },
+         showExternalPassword:async(parent,{accountId})=>{
+try {
+        // Find the account
+        const currentAccount = await Account.findById(accountId)
+        const currentPasswordId = currentAccount.password;
 
+        // Find password
+        const currentPassword = await Password.findById(currentPasswordId);
+        await currentPassword.viewPassword();
+        await currentPassword.save()
+        // Return the decrypted password
+        return currentAccount.populate("password")
+    } catch (error) {
+        // Find the account
+        const currentAccount = await Account.findById(accountId)
+        const currentPasswordId = currentAccount.password;
+
+        // Find password
+        const currentPassword = await Password.findById(currentPasswordId);
+        await currentPassword.encryptExternalPassword();
+        await currentPassword.save()
+        // Return the decrypted password
+        return currentAccount.populate("password")
+    }
+        },
+        deleteUserAccount:async(parent,{accountId})=>{
+            const currentAccount=await Account.findById(accountId)
+            await Password.findByIdAndDelete(currentAccount.password)
+            await currentAccount.deleteOne()
+        },
+        deleteUser:async(parent,{userId})=>{
+            const currentUser=await User.findById(userId)
+            await Password.findByIdAndDelete(currentUser.password)
+            await Account.findByIdAndDelete(currentUser.accounts)
+            await currentUser.deleteOne()
+        }
     }
 }
 
