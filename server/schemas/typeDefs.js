@@ -38,6 +38,7 @@ users:[User]
 user(username:String!):User
 me:User
 accounts(_id:ID!):Account
+showExternalPassword(accountId:ID!):Account
 }
 
 type Mutation{
