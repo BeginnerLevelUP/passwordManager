@@ -84,9 +84,15 @@ passwordSchema.methods.encryptExternalPassword = async function () {
     this.text = cryptr.encrypt(this.text);
 };
 
-passwordSchema.methods.viewPassword= async function () {
+passwordSchema.methods.viewPassword = async function () {
+    // Decrypt the password
     this.text = cryptr.decrypt(this.text);
+    setTimeout(async () => {
+        await this.encryptExternalPassword();
+        await this.save();
+    }, 5000);
 };
+
 
 // could create another feild that says strength and add a checker in the .pre and make it similar to the 
 // rarity thing in the trading card app

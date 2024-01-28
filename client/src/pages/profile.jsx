@@ -76,8 +76,13 @@ function ProfilePage() {
       edit: false,
       index: null,
     });
+
     window.location.reload()
   }
+  
+ const onDeleteClick=async(accountId)=>{
+
+ }
 
   if (loadingME) {
     return (
@@ -87,6 +92,7 @@ function ProfilePage() {
     );
   }
 
+  
   return (
     <>
       <div>
@@ -108,6 +114,13 @@ function ProfilePage() {
                       alt='Edit Icon'
                       onClick={() => {
                         onClickEdit(index);
+                      }}
+                    />
+                      <img
+                      src=''
+                      alt='Delte Icon'
+                      onClick={() => {
+                        onDeleteClick(id);
                       }}
                     />
                   </div>
@@ -134,13 +147,14 @@ function ProfilePage() {
                           onChange={onInputChange}
                         />
 
-                        <input
+                          <input
                           type='text'
-                          name='password'
+                          name='passwordText'
                           placeholder='Password'
-                          value={formValues.password}
+                          value={formValues.passwordText}
                           onChange={onInputChange}
                         />
+
 
                         <input
                           type='text'
@@ -159,6 +173,7 @@ function ProfilePage() {
                         />
 
                   <button type="submit">Submit</button>
+                  <button onClick={()=>{    setEdit({edit: false,index: null,});}}>Cancel</button>
                   </form>
                     </>
                   ) : (
@@ -169,9 +184,9 @@ function ProfilePage() {
                 <p>Email : {account.email}</p>
                 {
                   !view?(
-                <p>Password(Encrypted): {account.password.text.substring(0, 10)}.....</p> 
+                <p>Password (Encrypted): {account.password.text.substring(0, 10)}.....</p> 
                   ):(
-                <p>Password: {account.password.text.substring(0, 10)}.....</p> 
+                <p>Password: {account.password.text}</p> 
                   )
                 }
                       <img onClick={()=>{onViewClick(account._id)}}src='' alt='eye icon'></img>

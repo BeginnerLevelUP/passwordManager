@@ -124,24 +124,19 @@ const resolvers={
         updateUserAccount : async (parent, { passwordText, username, email, websiteUrl, notes, currentAccountId }) => {
     try {
         // Find the current account
-if (passwordText!==passwordText) {
-    const currentAccount = await Account.findOne({ _id: currentAccountId }).populate('password');
-    const passwordId = currentAccount.password._id;
-    
-    const currentPassword = await Password.findOne({ _id: passwordId });
 
-    currentPassword.text = passwordText;
-
-    await currentPassword.save();
-
-    return currentAccount;
-}
 const currentAccount =await Account.findOneAndUpdate(
                 { _id: currentAccountId },
                 { $set: { username,email,websiteUrl,notes,passwordText } },
                 { new: true }
             ).populate('password')
 currentAccount.updated=Date.now()
+ const passwordId = currentAccount.password._id;
+    const currentPassword = await Password.findOne({ _id: passwordId });
+
+    currentPassword.text = passwordText;
+    await currentPassword.encryptExternalPassword()
+    await currentPassword.save();
             await currentAccount.save()
 
     return currentAccount
