@@ -170,6 +170,17 @@ try {
         // Return the decrypted password
         return currentAccount.populate("password")
     }
+        },
+        deleteUserAccount:async(parent,{accountId})=>{
+            const currentAccount=await Account.findById(accountId)
+            await Password.findByIdAndDelete(currentAccount.password)
+            await currentAccount.deleteOne()
+        },
+        deleteUser:async(parent,{userId})=>{
+            const currentUser=await User.findById(userId)
+            await Password.findByIdAndDelete(currentUser.password)
+            await Account.findByIdAndDelete(currentUser.accounts)
+            await currentUser.deleteOne()
         }
     }
 }
