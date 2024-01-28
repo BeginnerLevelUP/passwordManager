@@ -28,6 +28,12 @@ function Nav() {
               Profile
             </button>
           </Link>
+ 
+          <Link to='/settings'>
+            <button>
+              Settings
+            </button>
+          </Link>         
           <a onClick={logout} href='/'>
             Logout
           </a>

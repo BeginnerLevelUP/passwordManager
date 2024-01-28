@@ -9,6 +9,7 @@ import './index.css'
 
 import HomePage from './pages/home.jsx';
 import ProfilePage from './pages/profile.jsx';
+import SettingsPage from './pages/settings.jsx';
 import ErrorPage from './pages/error.jsx';
 
 const router=createBrowserRouter([
@@ -24,6 +25,10 @@ const router=createBrowserRouter([
       {
         path:'/me',
         element:<ProfilePage></ProfilePage>
+      },
+      {
+        path:'/settings',
+        element:<SettingsPage></SettingsPage>
       }
 
     ]
