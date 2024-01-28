@@ -36,31 +36,6 @@ const resolvers={
             const populatedNewAccount=await Account.findById(_id).populate('password')
             return populatedNewAccount
         },
-         showExternalPassword:async(parent,{accountId})=>{
-try {
-        // Find the account
-        const currentAccount = await Account.findById(accountId)
-        const currentPasswordId = currentAccount.password;
-
-        // Find password
-        const currentPassword = await Password.findById(currentPasswordId);
-        await currentPassword.viewPassword();
-        await currentPassword.save()
-        // Return the decrypted password
-        return currentAccount.populate("password")
-    } catch (error) {
-        // Find the account
-        const currentAccount = await Account.findById(accountId)
-        const currentPasswordId = currentAccount.password;
-
-        // Find password
-        const currentPassword = await Password.findById(currentPasswordId);
-        await currentPassword.encryptExternalPassword();
-        await currentPassword.save()
-        // Return the decrypted password
-        return currentAccount.populate("password")
-    }
-        }
     },
     Mutation:{
         signup:async(parent,{username,email,password})=>{
@@ -175,8 +150,32 @@ currentAccount.updated=Date.now()
         console.error(error);
         throw new Error("Error updating account");
     }
-        }
+        },
+         showExternalPassword:async(parent,{accountId})=>{
+try {
+        // Find the account
+        const currentAccount = await Account.findById(accountId)
+        const currentPasswordId = currentAccount.password;
 
+        // Find password
+        const currentPassword = await Password.findById(currentPasswordId);
+        await currentPassword.viewPassword();
+        await currentPassword.save()
+        // Return the decrypted password
+        return currentAccount.populate("password")
+    } catch (error) {
+        // Find the account
+        const currentAccount = await Account.findById(accountId)
+        const currentPasswordId = currentAccount.password;
+
+        // Find password
+        const currentPassword = await Password.findById(currentPasswordId);
+        await currentPassword.encryptExternalPassword();
+        await currentPassword.save()
+        // Return the decrypted password
+        return currentAccount.populate("password")
+    }
+        }
     }
 }
 

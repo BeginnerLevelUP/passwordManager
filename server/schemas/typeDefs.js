@@ -38,7 +38,6 @@ users:[User]
 user(username:String!):User
 me:User
 accounts(_id:ID!):Account
-showExternalPassword(accountId:ID!):Account
 }
 
 type Mutation{
@@ -46,6 +45,7 @@ type Mutation{
     login(email:String!,password:String!):Auth
     addNewAccount(passwordText:String!,username:String,email:String,websiteUrl:String,notes:String,currentUsername:String!):Account
     updateUserAccount(passwordText:String,username:String,email:String,websiteUrl:String,notes:String,currentAccountId:ID!):Account
+    showExternalPassword(accountId:ID!):Account
 }
 `
 

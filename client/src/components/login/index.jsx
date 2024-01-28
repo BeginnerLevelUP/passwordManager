@@ -152,7 +152,6 @@ const onPasswordClick = () => {
   <Form.Group controlId="formPassword">
     <Form.Control
       type={viewPassword}
-      onClick={onPasswordClick}
       placeholder="******"
       name="password"
       value={formStateLogin.password}
@@ -160,7 +159,7 @@ const onPasswordClick = () => {
       className="form-input"
     />
     <Form.Text className="text-muted" onClick={onPasswordClick}>
-      Click to View And Edit Password
+      <img src='' alt='eye icon'></img>
     </Form.Text>
   </Form.Group>
 
@@ -221,7 +220,6 @@ const onPasswordClick = () => {
   <Form.Group controlId="formPassword">
     <Form.Control
       type={viewPassword}
-      onClick={onPasswordClick}
       placeholder="******"
       name="password"
       value={password}
@@ -229,7 +227,7 @@ const onPasswordClick = () => {
       className="form-input"
     />
     <Form.Text className="text-muted" onClick={onPasswordClick}>
-      Click to View And Edit Password
+      <img src='' alt='eye icon'></img>
     </Form.Text>
   </Form.Group>
 

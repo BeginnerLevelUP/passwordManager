@@ -1,19 +1,26 @@
 import Auth from "../../utils/auth";
 import { useQuery,useMutation } from "@apollo/client";
 import { QUERY_ME } from "../../utils/queries";
-import { UPDATE_USER_ACCOUNT } from "../../utils/mutations";
+import { UPDATE_USER_ACCOUNT,VIEW_PASSWORD } from "../../utils/mutations";
 import { useState} from "react";
 import {Navigate} from "react-router-dom"
 function ProfilePage() {
   //Mutations and Queries
-  const { loading, data: dataME } = useQuery(QUERY_ME);
-  const [updateAccount,{error:errorUpdate,data:dataUpdate}]=useMutation(UPDATE_USER_ACCOUNT)
+  const { loading:loadingME, data: dataME } = useQuery(QUERY_ME);
+    //Query Me
+  const username = dataME?.me?.username || null;
+  const email = dataME?.me?.email || null;
+  const accounts = dataME?.me?.accounts || null;
 
+  const [updateAccount,{error:errorUpdate,data:dataUpdate}]=useMutation(UPDATE_USER_ACCOUNT)
+  const [viewPassword,{error:errorPassword,data:dataPassword}]=useMutation(VIEW_PASSWORD)
   //State
   const [edit,setEdit]=useState({
     edit:false,
     index:null
   })
+
+  const [view,setView]=useState(false)
  
     const [formValues, setFormValues] = useState({
     username: '',
@@ -22,11 +29,6 @@ function ProfilePage() {
     websiteUrl: '',
     notes: '',
   });
-
-  //Query Me
-  const username = dataME?.me?.username || null;
-  const email = dataME?.me?.email || null;
-  const accounts = dataME?.me?.accounts || null;
 
   const onClickEdit = (index) => {
     setEdit({
@@ -43,8 +45,6 @@ function ProfilePage() {
       websiteUrl: selectedAccount.websiteUrl || '',
       notes: selectedAccount.notes || '',
     });
-
-    console.log(formValues)
   };
 
   const onInputChange = (e) => {
@@ -55,6 +55,14 @@ function ProfilePage() {
     });
   };
 
+  const onViewClick=async(id)=>{
+    const {data}=await viewPassword({
+      variables:{
+          accountId:id
+      }
+    })
+    setView(!view)
+  }
 
   const onEditFormSubmit = async (currentAccountId) => {
     const {data}=await updateAccount({
@@ -71,7 +79,7 @@ function ProfilePage() {
     window.location.reload()
   }
 
-  if (loading) {
+  if (loadingME) {
     return (
       <div>
         <p>Loading...</p>
@@ -156,9 +164,17 @@ function ProfilePage() {
                   ) : (
                     // Display account details
                     <>
+                    {/* gives these all divs */}
                      <p>Username: {account.username}</p>
                 <p>Email : {account.email}</p>
-                <p>Password: {account.password.text}</p>
+                {
+                  !view?(
+                <p>Password(Encrypted): {account.password.text.substring(0, 10)}.....</p> 
+                  ):(
+                <p>Password: {account.password.text.substring(0, 10)}.....</p> 
+                  )
+                }
+                      <img onClick={()=>{onViewClick(account._id)}}src='' alt='eye icon'></img>
                 <p>Website Url: {account.websiteUrl}</p>
                 <p>Notes: {account.notes}</p>
                     </>
