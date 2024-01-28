@@ -41,7 +41,7 @@ function ProfilePage() {
     setFormValues({
       username: selectedAccount.username || '',
       email: selectedAccount.email || '',
-      passwordText: selectedAccount.password.text || '',
+      passwordText: '',
       websiteUrl: selectedAccount.websiteUrl || '',
       notes: selectedAccount.notes || '',
     });
