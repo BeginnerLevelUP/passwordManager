@@ -68,8 +68,8 @@ mutation UpdateUserAccount($currentAccountId: ID!, $passwordText: String, $usern
 }
 `
 export const VIEW_PASSWORD=gql`
-mutation ShowExternalPassword($accountId: ID!) {
-  showExternalPassword(accountId: $accountId) {
+mutation ShowExternalPassword($accountId: ID!, $show: Boolean!) {
+  showExternalPassword(accountId: $accountId, show: $show) {
     _id
     username
     email

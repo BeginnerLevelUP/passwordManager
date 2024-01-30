@@ -146,31 +146,40 @@ currentAccount.updated=Date.now()
         throw new Error("Error updating account");
     }
         },
-         showExternalPassword:async(parent,{accountId})=>{
-try {
+showExternalPassword: async (parent, { accountId, show }) => {
+    try {
         // Find the account
-        const currentAccount = await Account.findById(accountId)
+        const currentAccount = await Account.findById(accountId);
         const currentPasswordId = currentAccount.password;
 
         // Find password
         const currentPassword = await Password.findById(currentPasswordId);
-        await currentPassword.viewPassword();
-        await currentPassword.save()
+
+        if (show) {
+            // Show password logic
+            await currentPassword.viewPassword();
+        } else {
+            // Encrypt password logic
+             currentPassword.text
+        }
+
+        await currentPassword.save();
+
         // Return the decrypted password
-        return currentAccount.populate("password")
+        return currentAccount.populate("password");
     } catch (error) {
-        // Find the account
-        const currentAccount = await Account.findById(accountId)
+                // Find the account
+        const currentAccount = await Account.findById(accountId);
         const currentPasswordId = currentAccount.password;
 
         // Find password
-        const currentPassword = await Password.findById(currentPasswordId);
-        await currentPassword.encryptExternalPassword();
-        await currentPassword.save()
-        // Return the decrypted password
-        return currentAccount.populate("password")
+        const currentPassword = await Password.findById(currentPasswordId)
+
+        // Return the account with populated password even in case of an error
+        return currentAccount.populate("password");
     }
-        },
+},
+
         deleteUserAccount:async(parent,{accountId})=>{
             const currentAccount=await Account.findById(accountId)
             await Password.findByIdAndDelete(currentAccount.password)

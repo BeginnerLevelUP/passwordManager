@@ -23,7 +23,7 @@ function ProfilePage() {
     index: null,
   });
 
-  const [view, setView] = useState(false);
+  const [view, setView] = useState(true);
 
   const [formValues, setFormValues] = useState({
     username: '',
@@ -58,13 +58,15 @@ function ProfilePage() {
     });
   };
 
-  const onViewClick = async (id) => {
+  const onViewClick = async (id,show) => {
     const { data } = await viewPassword({
       variables: {
         accountId: id,
+        show
       },
     });
-    setView(!view);
+    console.log(data)
+    setView(!view)
   };
 
   const onEditFormSubmit = async (currentAccountId) => {
@@ -188,12 +190,12 @@ function ProfilePage() {
                     <>
                       <p>Username: {account.username}</p>
                       <p>Email: {account.email}</p>
-                      {!view ? (
+                      {view ? (
                         <p>Password (Encrypted): {account.password.text.substring(0, 10)}.....</p>
                       ) : (
                         <p>Password: {account.password.text}</p>
                       )}
-                      <img onClick={() => { onViewClick(account._id); }} src='' alt='eye icon' />
+                      <img onClick={() => { onViewClick(account._id,view); }} src='' alt='eye icon' />
                       <p>Website Url: {account.websiteUrl}</p>
                       <p>Notes: {account.notes}</p>
                     </>
