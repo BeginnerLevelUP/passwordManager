@@ -48,7 +48,7 @@ const Email = (accounts) => {
     }).filter(message => message !== null); // Filter out null messages
     console.log(messages)
     messages.forEach((message) => {
-        // setInterval(() => {
+        setInterval(() => {
             emailjs.send(import.meta.env.VITE_YOUR_SERVICE_ID, import.meta.env.VITE_YOUR_TEMPLATE_ID, message).then(
                 function (response) {
                     console.log('SUCCESS!', response.status, response.text);
@@ -57,7 +57,8 @@ const Email = (accounts) => {
                     console.log('FAILED...', err);
                 },
             );
-        // }, message.message_duration); 
+        // }, message.message_duration); // bad - 2week good - 1month 
+                }, 30000); //test 30min
     });
 };
 
