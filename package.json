@@ -15,6 +15,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@emailjs/browser": "^4.1.0",
     "concurrently": "^8.2.2",
     "cryptr": "^6.3.0"
   }

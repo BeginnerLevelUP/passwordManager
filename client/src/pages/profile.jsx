@@ -4,7 +4,7 @@ import { QUERY_ME } from "../../utils/queries";
 import { UPDATE_USER_ACCOUNT, VIEW_PASSWORD, DELETE_USER_ACCOUNT } from "../../utils/mutations";
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
-
+import Email from "../../utils/email";
 function ProfilePage() {
   // Mutations and Queries
   const { loading: loadingME, data: dataME } = useQuery(QUERY_ME);
@@ -16,7 +16,6 @@ function ProfilePage() {
   const [updateAccount, { error: errorUpdate, data: dataUpdate }] = useMutation(UPDATE_USER_ACCOUNT);
   const [viewPassword, { error: errorPassword, data: dataPassword }] = useMutation(VIEW_PASSWORD);
   const [deleteAccount, { error: errorDelete, data: dataDelete }] = useMutation(DELETE_USER_ACCOUNT);
-
   // State
   const [edit, setEdit] = useState({
     edit: false,
@@ -99,7 +98,7 @@ function ProfilePage() {
       </div>
     );
   }
-
+  Email(accounts)
   return (
     <>
       <div>
@@ -112,6 +111,7 @@ function ProfilePage() {
             {accounts && accounts.length > 0 ? (
               // Display account details if there are accounts
               accounts.map((account, index) => (
+                
                 <div key={index}>
                   <div>
                     <h3>Account: {index}</h3>

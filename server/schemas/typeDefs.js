@@ -26,6 +26,7 @@ type Password{
     lowercase:Boolean
     number:Boolean
     specialCharacter:Boolean
+    strength:String
 }
 
 type Auth{

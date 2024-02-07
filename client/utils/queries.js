@@ -14,6 +14,7 @@ query Me {
       lowercase
       number
       specialCharacter
+      strength
     }
     accounts {
       _id
@@ -31,6 +32,7 @@ query Me {
     lowercase
     number
     specialCharacter
+          strength
       }
     }
   }
