@@ -139,3 +139,34 @@ export const DELETE_USER = gql`
     }
   }
 `;
+
+
+export const EMAIL_STATUS=gql`
+mutation ChangeEmailStatus($username: String!) {
+  changeEmailStatus(username: $username) {
+    _id
+    username
+    email
+    password {
+      _id
+      text
+      length
+      uppercase
+      lowercase
+      number
+      specialCharacter
+      strength
+    }
+    accounts {
+      _id
+      username
+      email
+      websiteUrl
+      notes
+      created
+      updated
+    }
+    allowUpdates
+  }
+}
+`

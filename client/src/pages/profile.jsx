@@ -98,7 +98,7 @@ function ProfilePage() {
       </div>
     );
   }
-  Email(accounts)
+  // Email(accounts)
   return (
     <>
       <div>

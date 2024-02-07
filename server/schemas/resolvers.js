@@ -190,7 +190,38 @@ showExternalPassword: async (parent, { accountId, show }) => {
             await Password.findByIdAndDelete(currentUser.password)
             await Account.findByIdAndDelete(currentUser.accounts)
             await currentUser.deleteOne()
+        },
+     changeEmailStatus: async (parent, { username }) => {
+    try {
+        // Find the user by username
+        let currentUser = await User.findOne({ username });
+
+        if (!currentUser) {
+            throw new Error('User not found.');
         }
+
+        // Toggle allowUpdates
+        currentUser.allowUpdates = !currentUser.allowUpdates;
+
+        // Save the updated user
+        currentUser = await currentUser.save();
+
+        // Populate the accounts field of the user
+        await currentUser.populate({
+            path: 'accounts',
+            populate: {
+                path: 'password'
+            }
+        })
+
+        // Return the updated user
+        return currentUser;
+    } catch (error) {
+        throw new Error(`Failed to update user's email status: ${error.message}`);
+    }
+}
+
+
     }
 }
 

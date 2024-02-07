@@ -5,6 +5,7 @@ type User {
     email: String
     password: Password
     accounts:[Account]
+    allowUpdates:Boolean
 }
 
 type Account{
@@ -49,6 +50,7 @@ type Mutation{
     showExternalPassword(accountId:ID!,show:Boolean!):Account
     deleteUserAccount(accountId:ID!):Account
     deleteUser(userId:ID!):User
+    changeEmailStatus(username:String!):User
 }
 `
 

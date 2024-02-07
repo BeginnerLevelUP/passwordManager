@@ -26,7 +26,11 @@ accounts:[
         type:Schema.Types.ObjectId, // id that references an already established id
         ref:'Account' // reference the frined model
     }
-]
+],
+allowUpdates:{
+    type:Boolean,
+    default:true
+}
 })
 
 const User = model('User', userSchema);
