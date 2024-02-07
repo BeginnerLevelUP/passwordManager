@@ -46,7 +46,6 @@ const Email = (accounts) => {
                 return null; // Add default case to handle unexpected strength values
         }
     }).filter(message => message !== null); // Filter out null messages
-    console.log(messages)
     messages.forEach((message) => {
         setInterval(() => {
             emailjs.send(import.meta.env.VITE_YOUR_SERVICE_ID, import.meta.env.VITE_YOUR_TEMPLATE_ID, message).then(
