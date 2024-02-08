@@ -50,7 +50,7 @@ type Mutation{
     showExternalPassword(accountId:ID!,show:Boolean!):Account
     deleteUserAccount(accountId:ID!):Account
     deleteUser(userId:ID!):User
-    changeEmailStatus(username:String!):User
+    changeEmailStatus(username:String!,status:Boolean!):User
 }
 `
 

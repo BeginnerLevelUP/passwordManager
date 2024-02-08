@@ -191,7 +191,7 @@ showExternalPassword: async (parent, { accountId, show }) => {
             await Account.findByIdAndDelete(currentUser.accounts)
             await currentUser.deleteOne()
         },
-     changeEmailStatus: async (parent, { username }) => {
+     changeEmailStatus: async (parent, { username,status }) => {
     try {
         // Find the user by username
         let currentUser = await User.findOne({ username });
@@ -201,7 +201,7 @@ showExternalPassword: async (parent, { accountId, show }) => {
         }
 
         // Toggle allowUpdates
-        currentUser.allowUpdates = !currentUser.allowUpdates;
+        currentUser.allowUpdates = status;
 
         // Save the updated user
         currentUser = await currentUser.save();

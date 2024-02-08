@@ -142,8 +142,8 @@ export const DELETE_USER = gql`
 
 
 export const EMAIL_STATUS=gql`
-mutation ChangeEmailStatus($username: String!) {
-  changeEmailStatus(username: $username) {
+mutation Mutation($username: String!, $status: Boolean!) {
+  changeEmailStatus(username: $username, status: $status) {
     _id
     username
     email

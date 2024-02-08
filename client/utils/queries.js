@@ -35,6 +35,7 @@ query Me {
           strength
       }
     }
+    allowUpdates
   }
 }
 `

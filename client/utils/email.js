@@ -1,6 +1,7 @@
 import emailjs from '@emailjs/browser';
 emailjs.init(import.meta.env.VITE_YOUR_PUBLIC_KEY);
-const Email = (accounts) => {
+const Email = (accounts,status) => {
+    if(status){
     const messages = accounts.map((account) => {
         switch (account.password.strength) {
             case "bad":
@@ -56,9 +57,12 @@ const Email = (accounts) => {
                     console.log('FAILED...', err);
                 },
             );
-        // }, message.message_duration); // bad - 2week good - 1month 
-                }, 30000); //test 30min
+        }, message.message_duration); // bad - 2week good - 1month 
     });
+    }else{
+        console.log('user disabled email notifications')
+    }
+
 };
 
 export default Email;
