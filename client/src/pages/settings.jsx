@@ -6,6 +6,7 @@ import { QUERY_ME } from '../../utils/queries';
 function SettingsPage() {
   //Mutation
   const [changeEmailStatus,{error:emailUpdate,data:emailData}]=useMutation(EMAIL_STATUS)
+
   // State 
   const [username, setUsername] = useState('JohnDoe');
   const [email, setEmail] = useState('johndoe@example.com');
@@ -43,7 +44,6 @@ function SettingsPage() {
       },
       refetchQueries:[{query:QUERY_ME}]
     })
-    console.log(data)
   };
 
   const handleUsernameChange = (event) => {

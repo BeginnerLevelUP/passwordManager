@@ -13,7 +13,6 @@ function ProfilePage() {
   const email = dataME?.me?.email || null;
   const accounts = dataME?.me?.accounts || null;
   const emailStatus=dataME?.me.allowUpdates
-  console.log(emailStatus)
   const [updateAccount, { error: errorUpdate, data: dataUpdate }] = useMutation(UPDATE_USER_ACCOUNT);
   const [viewPassword, { error: errorPassword, data: dataPassword }] = useMutation(VIEW_PASSWORD);
   const [deleteAccount, { error: errorDelete, data: dataDelete }] = useMutation(DELETE_USER_ACCOUNT);
