@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { EMAIL_STATUS } from '../../utils/mutations';
+import { EMAIL_STATUS,UPDATE_ACCOUNT } from '../../utils/mutations';
 import Auth from '../../utils/auth';
 import { QUERY_ME } from '../../utils/queries';
 function SettingsPage() {
   //Mutation
   const [changeEmailStatus,{error:emailUpdate,data:emailData}]=useMutation(EMAIL_STATUS)
-
+  const [updateAccount,{error:errorAccount,data:updateData}]=useMutation(UPDATE_ACCOUNT)
+  //Auth
+  const authUsername=Auth.getProfile()?.data?.username
+  const authEmail=Auth.getProfile()?.data?.email
+  const id=Auth.getProfile()?.data?._id
   // State 
-  const [username, setUsername] = useState('JohnDoe');
-  const [email, setEmail] = useState('johndoe@example.com');
+  const [username, setUsername] = useState(authUsername);
+  const [email, setEmail] = useState(authEmail);
   const [password, setPassword] = useState('********');
   const [allowUpdates, setAllowUpdates] = useState(true);
   const [isUsernameEditing, setIsUsernameEditing] = useState(false);
@@ -35,11 +39,10 @@ function SettingsPage() {
   };
 
   const handleAllowUpdatesChange = async(event) => {
-    const username=Auth.getProfile()?.data?.username
     setAllowUpdates(event.target.checked);
     const {data}= await changeEmailStatus({
       variables:{
-        username,
+        id,
         status:!allowUpdates
       },
       refetchQueries:[{query:QUERY_ME}]
@@ -77,18 +80,39 @@ function SettingsPage() {
     }
   };
 
-  const handleSave = (field) => {
+  const handleSave =async (field) => {
     switch (field) {
       case 'username':
         setUsername(tempUsername);
+       await updateAccount({
+      variables:{
+        id,
+        username:tempUsername
+      },
+      refetchQueries:[{query:QUERY_ME}]
+    })
         setIsUsernameEditing(false);
         break;
       case 'email':
         setEmail(tempEmail);
+      await updateAccount({
+      variables:{
+        id,
+        email:tempEmail
+      },
+      refetchQueries:[{query:QUERY_ME}]
+    })
         setIsEmailEditing(false);
         break;
       case 'password':
         setPassword(tempPassword);
+        await updateAccount({
+      variables:{
+        id,
+        password:tempPassword
+      },
+      refetchQueries:[{query:QUERY_ME}]
+    })
         setIsPasswordEditing(false);
         break;
       default:

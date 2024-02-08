@@ -121,6 +121,32 @@ const resolvers={
             }
 
         },
+        updateAccount:async(parent,{username,email,password,_id})=>{
+            try{
+                const currentUser=await User.findByIdAndUpdate(
+                    {_id},
+                    {$set:{username,email}},
+                    {new:true}
+                    )
+                    
+                    if(password){
+                const currentPassword=await Password.findOneAndUpdate(
+                    {_id:currentUser.password},
+                    {$set:{text:password}},
+                    {new:true}
+                )
+                await currentPassword.hashNativePassword()
+                await currentPassword.save()
+                    }
+
+                await currentUser.save()
+                
+                return currentUser
+            .populate('password accounts')
+            }catch(e){
+                console.log(e)
+            }
+        },
         updateUserAccount : async (parent, { passwordText, username, email, websiteUrl, notes, currentAccountId }) => {
     try {
         // Find the current account
@@ -146,7 +172,7 @@ currentAccount.updated=Date.now()
         throw new Error("Error updating account");
     }
         },
-showExternalPassword: async (parent, { accountId, show }) => {
+        showExternalPassword: async (parent, { accountId, show }) => {
     try {
         // Find the account
         const currentAccount = await Account.findById(accountId);
@@ -178,7 +204,7 @@ showExternalPassword: async (parent, { accountId, show }) => {
         // Return the account with populated password even in case of an error
         return currentAccount.populate("password");
     }
-},
+        },
 
         deleteUserAccount:async(parent,{accountId})=>{
             const currentAccount=await Account.findById(accountId)
@@ -191,10 +217,10 @@ showExternalPassword: async (parent, { accountId, show }) => {
             await Account.findByIdAndDelete(currentUser.accounts)
             await currentUser.deleteOne()
         },
-     changeEmailStatus: async (parent, { username,status }) => {
+     changeEmailStatus: async (parent, { _id,status }) => {
     try {
         // Find the user by username
-        let currentUser = await User.findOne({ username });
+        let currentUser = await User.findById({_id});
 
         if (!currentUser) {
             throw new Error('User not found.');
