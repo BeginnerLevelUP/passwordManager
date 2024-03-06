@@ -1,0 +1,175 @@
+*{
+    text-align:center;
+}
+/* Header */
+header {
+    font-size: 2.5em;
+    text-align: center;
+    padding: 1%;
+    font-family: var(--headFont);
+}
+
+header h1 {
+    font-size: 2em;
+    font-weight: 900;
+}
+
+header h2 {
+    font-size: 1em;
+    font-weight: 600;
+}
+
+header span {
+    color: var(--primary);
+}
+
+/* Nav */
+nav{
+    margin:20px
+}
+
+div button{
+    margin: 2%
+}
+section{
+    margin-top:5%;
+    display:grid;
+    grid-template-columns: 450px 1100px;
+    grid-template-rows: 350px 350px;
+    gap: 20px
+}
+article img{
+    position: relative;
+        top: 15px;
+        height: 50px;
+        width: fit-content;
+}
+.specifications{
+    margin: 0 15%
+}
+.specifications h3{
+font-size: 2em;
+color: var(--textColor);
+font-weight: 600;
+border-bottom: 2px solid red;
+padding:10px
+}
+.strength{
+        backdrop-filter: blur(20px);
+        background-color: rgba(255, 255, 255, 0.5);
+        box-shadow: 0 1px 12px rgba(0, 0, 0, 0.25);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius:8px;
+        padding:10%;
+        margin-left:10%;
+}
+
+.strength li{
+    list-style-type:none;
+    font-weight: 500;
+    margin:10% 0;
+}
+
+/* Password TextArea */
+textarea{
+    margin:auto;
+    border-radius:8px;
+    width:800px;
+    height:100px;
+    resize:none;
+    font-size:50px;
+    text-align:center;
+}
+
+/* Password Criteria */
+.checkboxDiv{
+    margin:10px;
+    font-weight: 600;
+}
+.checkboxDiv label{
+    margin-right:2rem
+}
+
+.checkBox .ikxBAC {
+    appearance: none;
+    background-color: #dfe1e4;
+    border-radius: 72px;
+    border-style: none;
+    flex-shrink: 0;
+    height: 20px;
+    margin: 0;
+    position: relative;
+    width: 30px;
+}
+
+.checkBox .ikxBAC::before {
+    bottom: -6px;
+    content: "";
+    left: -6px;
+    position: absolute;
+    right: -6px;
+    top: -6px;
+}
+
+.checkBox .ikxBAC,
+.checkBox .ikxBAC::after {
+    transition: all 100ms ease-out;
+}
+
+.checkBox .ikxBAC::after {
+    background-color: #fff;
+    border-radius: 50%;
+    content: "";
+    height: 14px;
+    left: 3px;
+    position: absolute;
+    top: 3px;
+    width: 14px;
+}
+
+.checkBox input[type=checkbox] {
+    cursor: default;
+}
+
+.checkBox .ikxBAC:hover {
+    background-color: #c9cbcd;
+    transition-duration: 0s;
+}
+
+.checkBox .ikxBAC:checked {
+    background-color: green;
+}
+
+.checkBox .ikxBAC:checked::after {
+    background-color: #fff;
+    left: 13px;
+}
+
+.checkBox :focus:not(.focus-visible) {
+    outline: 0;
+}
+
+.checkBox .ikxBAC:checked:hover {
+    background-color: green;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    background-color: #ff0000;
+}
+
+/* Change the color of the range slider thumb */
+input[type="range"]::-webkit-slider-thumb:active {
+    filter: brightness(50%);
+}
+/* Footer
+footer {
+    background-color: #dfe1e4;
+    margin:auto;
+    width: 600px;
+}
+
+footer li{
+    list-style-type:none;
+    display:inline;
+    margin:0 20%
+} */

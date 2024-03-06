@@ -9,7 +9,7 @@ function Nav() {
   };
 
   return (
-    <header>
+    <nav>
       {!Auth.loggedIn() ? (
         <>
 
@@ -39,7 +39,7 @@ function Nav() {
           </a>
         </>
       )}
-    </header>
+    </nav>
   );
 }
 

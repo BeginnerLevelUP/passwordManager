@@ -5,7 +5,7 @@ import PasswordStatus from "../components/pwdStatus";
 import React, { useState } from 'react';
 import Toast from 'react-bootstrap/Toast';
 import ToastContainer from 'react-bootstrap/ToastContainer';
-
+import "./home.css"
 function HomePage() {
   const [showToast, setShowToast] = useState(false);
   const [position, setPosition] = useState('top-start');
@@ -18,10 +18,24 @@ function HomePage() {
     setPassword(password)
   }
 
+  const onCopyClick=()=>{
+      navigator.clipboard.writeText(password)
+      // get some sort of conformation message
+  }
+
   const toggleToast = () => setShowToast(!showToast);
 
   return (
     <>
+                <h4>Type Or Click Generate Button</h4>
+    <section>
+
+    <article>
+      <PasswordStatus userResults={password}></PasswordStatus>
+    </article>
+
+
+      <article>
       <GenPassword onGen={onGen} forSignUp={false}></GenPassword>
       {!Auth.loggedIn() ? (
         <>
@@ -59,7 +73,11 @@ function HomePage() {
       ) : (
         <SavePassword Password={password}></SavePassword>
       )}
-      <PasswordStatus userResults={password}></PasswordStatus>
+      <img src='/icons/clipboard.png' onClick={onCopyClick}></img>
+      </article>
+
+    </section>
+
     </>
   );
 }
