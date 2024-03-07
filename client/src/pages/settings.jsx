@@ -125,7 +125,7 @@ return (
       <h1>Must Be Logged In</h1>
     ) : (
       <div>
-        <h1>Settings</h1>
+        <h1 className="title" >Settings</h1>
         <div>
           <p>
             Username: {isUsernameEditing ? (

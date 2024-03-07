@@ -5,7 +5,9 @@ import { useMutation } from '@apollo/client';
 import { LOGIN, SIGNUP } from '../../../utils/mutations';
 import Auth from '../../../utils/auth';
 import GenPassword from '../genPassword';
-
+//Icons
+ import hideIcon from "/icons/hide.png"
+ import showIcon from "/icons/view.png"
 function LoginOrSignUp() {
   //For Props
   const [password,setPassword]=useState('')
@@ -122,6 +124,7 @@ const onPasswordClick = () => {
 };
   return (
     <>
+    <div id='login'>
       {/* Login modal */}
       <button onClick={handleShowLogin}>Login </button>
 
@@ -159,7 +162,7 @@ const onPasswordClick = () => {
       className="form-input"
     />
     <Form.Text className="text-muted" onClick={onPasswordClick}>
-      <img src='' alt='eye icon'></img>
+     <img src={viewPassword === 'password' ? showIcon : hideIcon} className='icon' alt='eye icon'></img>
     </Form.Text>
   </Form.Group>
 
@@ -227,7 +230,7 @@ const onPasswordClick = () => {
       className="form-input"
     />
     <Form.Text className="text-muted" onClick={onPasswordClick}>
-      <img src='' alt='eye icon'></img>
+  <img src={viewPassword === 'password' ? showIcon : hideIcon} className='icon' alt='eye icon'></img>
     </Form.Text>
   </Form.Group>
 
@@ -247,6 +250,7 @@ const onPasswordClick = () => {
           </>
         </Modal.Body>
       </Modal>
+  </div>
     </>
   );
 }

@@ -38,7 +38,7 @@ section{
     grid-template-rows: 350px 350px;
     gap: 20px
 }
-article img{
+.icon {
     position: relative;
         top: 15px;
         height: 50px;
@@ -54,6 +54,11 @@ font-weight: 600;
 border-bottom: 2px solid red;
 padding:10px
 }
+
+.specifications input{
+    margin:2%;
+}
+
 .strength{
         backdrop-filter: blur(20px);
         background-color: rgba(255, 255, 255, 0.5);
@@ -70,6 +75,10 @@ padding:10px
     margin:10% 0;
 }
 
+.title{
+    font-weight: 600;
+    font-size:2rem;
+}
 /* Password TextArea */
 textarea{
     margin:auto;
@@ -86,7 +95,7 @@ textarea{
     margin:10px;
     font-weight: 600;
 }
-.checkboxDiv label{
+.specifications label{
     margin-right:2rem
 }
 
@@ -161,15 +170,4 @@ input[type="range"]::-webkit-slider-thumb {
 input[type="range"]::-webkit-slider-thumb:active {
     filter: brightness(50%);
 }
-/* Footer
-footer {
-    background-color: #dfe1e4;
-    margin:auto;
-    width: 600px;
-}
 
-footer li{
-    list-style-type:none;
-    display:inline;
-    margin:0 20%
-} */

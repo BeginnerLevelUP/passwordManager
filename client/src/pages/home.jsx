@@ -27,7 +27,7 @@ function HomePage() {
 
   return (
     <>
-                <h4>Type Or Click Generate Button</h4>
+                <h4 className="title">Type Or Click Generate Button</h4>
     <section>
 
     <article>
@@ -73,7 +73,7 @@ function HomePage() {
       ) : (
         <SavePassword Password={password}></SavePassword>
       )}
-      <img src='/icons/clipboard.png' onClick={onCopyClick}></img>
+      <img className="icon" src='/icons/clipboard.png' onClick={onCopyClick}></img>
       </article>
 
     </section>

@@ -1,0 +1,10 @@
+#profile .container{
+    display:flex;
+    justify-content: space-between;
+}
+
+.container div{
+    border:2px red solid;
+    padding:2%;
+    margin:2%;
+}

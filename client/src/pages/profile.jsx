@@ -5,6 +5,10 @@ import { UPDATE_USER_ACCOUNT, VIEW_PASSWORD, DELETE_USER_ACCOUNT } from "../../u
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import Email from "../../utils/email";
+//Icons
+ import hideIcon from "/icons/hide.png"
+ import showIcon from "/icons/view.png"
+import "./profile.css"
 function ProfilePage() {
   // Mutations and Queries
   const { loading: loadingME, data: dataME } = useQuery(QUERY_ME);
@@ -101,32 +105,34 @@ function ProfilePage() {
   Email(accounts,emailStatus)
   return (
     <>
-      <div>
+      <div id="profile">
         {!Auth.loggedIn() ? (
           <h1>Must Be Logged In</h1>
         ) : (
           <>
-            <h1>Hello {username}</h1>
-            <h2>{email}</h2>
+            <h1 className="title">Welcome Back {username}</h1>
+            <div className="container">
             {accounts && accounts.length > 0 ? (
               // Display account details if there are accounts
               accounts.map((account, index) => (
                 
                 <div key={index}>
                   <div>
-                    <h3>Account: {index}</h3>
+                    <h3>Account: {index+1}</h3>
                     <p>Create On: {account.created}</p>
                     <p>Updated On: {account.updated}</p>
                     <img
-                      src='' 
+                      src='/icons/edit.png' 
                       alt='Edit Icon'
+                      className="icon"
                       onClick={() => {
                         onClickEdit(index);
                       }}
                     />
                     <img
-                      src='' 
+                      src='/icons/delete.png' 
                       alt='Delete Icon'
+                      className="icon"
                       onClick={() => {
                         onDeleteClick(account._id);
                       }}
@@ -134,7 +140,7 @@ function ProfilePage() {
                   </div>
                   {edit.edit && edit.index === index ? (
                     // Display edit form only for the selected account
-                    <>
+        
                       <form
                         onSubmit={() => {
                           onEditFormSubmit(account._id);
@@ -184,7 +190,6 @@ function ProfilePage() {
                         <button type="submit">Submit</button>
                         <button onClick={() => { setEdit({ edit: false, index: null }); }}>Cancel</button>
                       </form>
-                    </>
                   ) : (
                     // Display account details
                     <>
@@ -195,7 +200,7 @@ function ProfilePage() {
                       ) : (
                         <p>Password: {account.password.text}</p>
                       )}
-                      <img onClick={() => { onViewClick(account._id,view); }} src='' alt='eye icon' />
+                      <img onClick={() => { onViewClick(account._id,view); }} src={view === true ? showIcon : hideIcon} className='icon' alt='eye icon' />
                       <p>Website Url: {account.websiteUrl}</p>
                       <p>Notes: {account.notes}</p>
                     </>
@@ -206,6 +211,7 @@ function ProfilePage() {
               // Display a message if there are no accounts
               <h1>No passwords saved</h1>
             )}
+         </div>
           </>
         )}
       </div>
