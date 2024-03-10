@@ -20,7 +20,9 @@
       --headFont: 'Bebas Neue', sans-serif;
       --listFont: 'Lato', sans-serif;
 }
-
+*{
+  font-family: var(--headFont);
+}
 a {
   font-weight: 500;
 color: var(--textColor);;
