@@ -66,7 +66,9 @@ padding:10px
         border: 1px solid rgba(255, 255, 255, 0.3);
         border-radius:8px;
         padding:10%;
-        margin-left:10%;
+        margin:2% 10%;
+        
+        color:white;
 }
 
 .strength li{
@@ -81,6 +83,8 @@ padding:10px
 }
 /* Password TextArea */
 textarea{
+    border-style: dashed;
+    border-color:var(--accent);
     margin:auto;
     border-radius:8px;
     width:800px;
@@ -89,7 +93,11 @@ textarea{
     font-size:50px;
     text-align:center;
 }
-
+textarea:focus{
+    outline: none !important;
+        border: 1px solid var(--primary);
+        box-shadow: 0 0 10px #719ECE;
+}
 /* Password Criteria */
 .checkboxDiv{
     margin:10px;
@@ -99,7 +107,7 @@ textarea{
     margin-right:2rem
 }
 
-.checkBox .ikxBAC {
+.checkboxDiv .ikxBAC {
     appearance: none;
     background-color: #dfe1e4;
     border-radius: 72px;
@@ -111,7 +119,7 @@ textarea{
     width: 30px;
 }
 
-.checkBox .ikxBAC::before {
+.checkboxDiv .ikxBAC::before {
     bottom: -6px;
     content: "";
     left: -6px;
@@ -162,12 +170,35 @@ textarea{
     background-color: green;
 }
 
+/* Styles for the range input */
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 75%;
+    height: 10px;
+    background: #ddd;
+    border-radius:8px;
+}
+
+/* Styling for the slider thumb */
 input[type="range"]::-webkit-slider-thumb {
-    background-color: #ff0000;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--primary);;
+    /* Adjust the color here */
+    border-radius: 50%;
+    cursor: pointer;
 }
 
-/* Change the color of the range slider thumb */
-input[type="range"]::-webkit-slider-thumb:active {
-    filter: brightness(50%);
+
+
+/* Changing the appearance of the thumb when the range input is active */
+input[type="range"]:active::-webkit-slider-thumb {
+    background:var(--accent);
+    /* Adjust the color here */
 }
 
+#loginForm input ,#signupForm input{
+margin:2% auto
+}

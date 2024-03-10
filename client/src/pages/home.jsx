@@ -27,7 +27,7 @@ function HomePage() {
 
   return (
     <>
-                <h4 className="title">Type Or Click Generate Button</h4>
+                <h4 className="title">Type Or Click Generate </h4>
     <section>
 
     <article>

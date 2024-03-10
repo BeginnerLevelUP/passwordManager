@@ -105,18 +105,18 @@ function ProfilePage() {
   Email(accounts,emailStatus)
   return (
     <>
-      <div id="profile">
+      <div>
         {!Auth.loggedIn() ? (
           <h1>Must Be Logged In</h1>
         ) : (
           <>
             <h1 className="title">Welcome Back {username}</h1>
-            <div className="container">
+            <div  id="profile">
             {accounts && accounts.length > 0 ? (
               // Display account details if there are accounts
               accounts.map((account, index) => (
                 
-                <div key={index}>
+                <div key={index} className="container">
                   <div>
                     <h3>Account: {index+1}</h3>
                     <p>Create On: {account.created}</p>
@@ -141,12 +141,13 @@ function ProfilePage() {
                   {edit.edit && edit.index === index ? (
                     // Display edit form only for the selected account
         
-                      <form
+                      <form 
                         onSubmit={() => {
                           onEditFormSubmit(account._id);
                         }}
                       >
                         {/* Replace with your input fields */}
+                        <div className="edit">
                         <input
                           type='text'
                           name='username'
@@ -186,7 +187,7 @@ function ProfilePage() {
                           value={formValues.notes}
                           onChange={onInputChange}
                         />
-
+</div>
                         <button type="submit">Submit</button>
                         <button onClick={() => { setEdit({ edit: false, index: null }); }}>Cancel</button>
                       </form>

@@ -116,10 +116,10 @@ const onGenClick = () => {
           {/* CheckBoxes to Specify Password */}
           <div className="checkboxContainer">
             <div className="checkboxDiv">
-                <div class="checkBox">
+                <div className="checkBox">
          <label htmlFor="uppercase">Uppercase</label>
                   <input 
-                  class="sc-gJwTLC ikxBAC"
+                  className="sc-gJwTLC ikxBAC"
                   id="uppercase"
                   type="checkbox"
                   checked={upper}
@@ -131,10 +131,10 @@ const onGenClick = () => {
             </div>
 
             <div className="checkboxDiv">
-              <div  class="checkBox">
+              <div  className="checkBox">
               <label htmlFor="lowercase">Lowercase</label>
               <input
-                class="sc-gJwTLC ikxBAC"
+                className="sc-gJwTLC ikxBAC"
                 id="lowercase"
                 type="checkbox"
                 checked={lower}
@@ -147,10 +147,10 @@ const onGenClick = () => {
             </div>
 
             <div className="checkboxDiv">
-              <div class="checkBox">
+              <div className="checkBox">
               <label htmlFor="numbers">Numbers</label>
               <input
-                class="sc-gJwTLC ikxBAC"
+                className="sc-gJwTLC ikxBAC"
                 id="numbers"
                 type="checkbox"
                 checked={num}
@@ -162,10 +162,10 @@ const onGenClick = () => {
             </div>
 
             <div className="checkboxDiv">
-            <div class="checkBox">
+            <div className="checkBox">
               <label htmlFor="specialCharacters">Special Characters</label>
               <input
-                class="sc-gJwTLC ikxBAC"
+                className="sc-gJwTLC ikxBAC"
                 id="specialCharacters"
                 type="checkbox"
                 checked={spec}
@@ -198,6 +198,7 @@ const onGenClick = () => {
               <input
                 id="uppercase"
                 type="checkbox"
+                className="checkbox"
                 checked={upper}
                 onChange={() => {
                   onCheckboxChange(upper, isUpper);

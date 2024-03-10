@@ -1,10 +1,31 @@
-#profile .container{
-    display:flex;
-    justify-content: space-between;
+.container{
+    padding:5%;
+    background-color: red;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 8px;
+    margin:2%;
+    font-weight: 600;
+            backdrop-filter: blur(20px);
+                background-color: var(--secondary);
+                box-shadow: 0 1px 12px rgba(0, 0, 0, 0.25);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                color: white;
+}
+.container p{
+    margin:10% 0;
+}
+#profile{
+    display: flex;
+    justify-content: space-evenly;
 }
 
-.container div{
-    border:2px red solid;
-    padding:2%;
-    margin:2%;
+.edit{
+    padding:4%;
+    display: flex;
+    flex-direction: column;
+}
+.edit input{
+    margin: 4% 0;
+    border-radius:8px;
 }
