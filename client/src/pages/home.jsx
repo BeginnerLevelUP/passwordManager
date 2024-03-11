@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import Toast from 'react-bootstrap/Toast';
 import ToastContainer from 'react-bootstrap/ToastContainer';
 import "./home.css"
+
 function HomePage() {
   const [showToast, setShowToast] = useState(false);
   const [position, setPosition] = useState('top-start');

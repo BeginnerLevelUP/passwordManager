@@ -25,6 +25,9 @@ header span {
     color: var(--primary);
 }
 
+header img{
+   margin:0 1%; 
+}
 /* Nav */
 nav {
     margin: 20px

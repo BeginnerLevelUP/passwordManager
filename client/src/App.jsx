@@ -11,7 +11,6 @@ import { Outlet } from 'react-router-dom';
 import './App.css'
 
 import Header from './components/header'
-import Footer from './components/footer'
 import Nav from './components/nav';
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -44,7 +43,6 @@ function App() {
       <Header /> 
       <Nav/>
       <Outlet></Outlet>
-      <Footer /> 
       </ApolloProvider>
     </>
   )
