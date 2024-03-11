@@ -257,6 +257,11 @@ input[type="range"]:active::-webkit-slider-thumb {
         text-align: center;
         margin: 5% 0;
     }
+                .icon {
+                    width: 10px;
+                    height: 10px;
+                    margin: 0 5px;
+                }
 }
 
 
