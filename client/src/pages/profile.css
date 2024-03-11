@@ -34,6 +34,11 @@
 
 
 @media only screen and (max-width: 767px) {
+        .icon {
+                width: 10px;
+                height: 10px;
+                margin: 0 5px;
+            }
     #profile {
             display: flex;
             flex-direction: column;
