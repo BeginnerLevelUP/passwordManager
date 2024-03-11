@@ -73,7 +73,7 @@ function HomePage() {
       ) : (
         <SavePassword Password={password}></SavePassword>
       )}
-      <img className="icon" src='/icons/clipboard.png' onClick={onCopyClick}></img>
+      <img  id='copyIcon' className="icon" src='/icons/clipboard.png' onClick={onCopyClick}></img>
       </article>
 
     </section>

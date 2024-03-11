@@ -29,3 +29,12 @@
     margin: 4% 0;
     border-radius:8px;
 }
+
+
+@media only screen and (max-width: 767px) {
+    #profile {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+}
