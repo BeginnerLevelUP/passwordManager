@@ -1,7 +1,8 @@
-*{
-    text-align:center;
-    
+* {
+    text-align: center;
+
 }
+
 /* Header */
 header {
     font-size: 2.5em;
@@ -25,87 +26,95 @@ header span {
 }
 
 /* Nav */
-nav{
-    margin:20px
+nav {
+    margin: 20px
 }
 
-div button{
+div button {
     margin: 2%
 }
-section{
-    margin-top:5%;
-    display:grid;
-    grid-template-columns: 600px 1400px;
+
+section {
+    margin-top: 5%;
+    display: grid;
+    grid-template-columns: 450px 1100px;
     grid-template-rows: 350px 350px;
-    gap: 20px;
+    gap: 20px
 }
+
 .icon {
     position: relative;
-        top: 15px;
-        height: 50px;
-        width: fit-content;
+    top: 15px;
+    height: 50px;
+    width: fit-content;
 }
-.specifications{
+
+.specifications {
     margin: 0 15%
 }
-.specifications h3{
-font-size: 2em;
-color: var(--textColor);
-font-weight: 600;
-border-bottom: 2px solid red;
-padding:10px
+
+.specifications h3 {
+    font-size: 2em;
+    color: var(--textColor);
+    font-weight: 600;
+    border-bottom: 2px solid red;
+    padding: 10px
 }
 
-.specifications input{
-    margin:2%;
+.specifications input {
+    margin: 2%;
 }
 
-.strength{
-        backdrop-filter: blur(20px);
-        background-color: rgba(255, 255, 255, 0.5);
-        box-shadow: 0 1px 12px rgba(0, 0, 0, 0.25);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        border-radius:8px;
-        padding:10%;
-        margin:2% 10%;
-        
-        color:white;
+.strength {
+    backdrop-filter: blur(20px);
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 1px 12px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    padding: 10%;
+    margin: 2% 10%;
+
+    color: white;
 }
 
-.strength li{
-    list-style-type:none;
+.strength li {
+    list-style-type: none;
     font-weight: 500;
-    margin:10% 0;
+    margin: 10% 0;
 }
 
-.title{
+.title {
     font-weight: 600;
-    font-size:2rem;
+    font-size: 2rem;
 }
+
 /* Password TextArea */
-textarea{
+textarea {
     border-style: dashed;
-    border-color:var(--accent);
-    margin:auto;
-    border-radius:8px;
-    width:800px;
-    height:100px;
-    resize:none;
-    font-size:50px;
-    text-align:center;
+    border-color: var(--accent);
+    margin: auto;
+    border-radius: 8px;
+    width: 800px;
+    height: 100px;
+    resize: none;
+    font-size: 50px;
+    text-align: center;
 }
-textarea:focus{
+
+textarea:focus {
     outline: none !important;
-        border: 1px solid var(--primary);
-        box-shadow: 0 0 10px #719ECE;
+    border: 1px solid var(--primary);
+    box-shadow: 0 0 10px #719ECE;
 }
+
 /* Password Criteria */
-.checkboxDiv{
-    margin:10px;
+.checkboxDiv {
+    margin: 10px;
     font-weight: 600;
 }
-.specifications label{
-    margin-right:2rem
+
+.specifications label {
+    margin-right: 2rem
 }
 
 .checkboxDiv .ikxBAC {
@@ -177,7 +186,7 @@ input[type="range"] {
     width: 75%;
     height: 10px;
     background: #ddd;
-    border-radius:8px;
+    border-radius: 8px;
 }
 
 /* Styling for the slider thumb */
@@ -186,7 +195,8 @@ input[type="range"]::-webkit-slider-thumb {
     appearance: none;
     width: 20px;
     height: 20px;
-    background: var(--primary);;
+    background: var(--primary);
+    ;
     /* Adjust the color here */
     border-radius: 50%;
     cursor: pointer;
@@ -196,14 +206,14 @@ input[type="range"]::-webkit-slider-thumb {
 
 /* Changing the appearance of the thumb when the range input is active */
 input[type="range"]:active::-webkit-slider-thumb {
-    background:var(--accent);
+    background: var(--accent);
     /* Adjust the color here */
 }
 
-#loginForm input ,#signupForm input{
-margin:2% auto
+#loginForm input,
+#signupForm input {
+    margin: 2% auto
 }
-
 @media only screen and (max-width: 767px) {
     .title {
         display: none;
