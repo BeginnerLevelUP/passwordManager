@@ -35,9 +35,9 @@ div button{
 section{
     margin-top:5%;
     display:grid;
-    grid-template-columns: 450px 1100px;
+    grid-template-columns: 600px 1400px;
     grid-template-rows: 350px 350px;
-    gap: 20px
+    gap: 20px;
 }
 .icon {
     position: relative;
@@ -244,4 +244,35 @@ margin:2% auto
         text-align: center;
         margin: 5% 0;
     }
+}
+
+
+@media only screen and (max-width:1024px) and (min-width:768px) {
+    .title {
+            display: none;
+        }
+    
+        nav {
+            display: flex;
+            justify-content:center;
+        }
+    #copyIcon {
+            display: none;
+        }
+section {
+        margin-top: 5%;
+        display: block;
+    }
+
+        textarea {
+            border-style: dashed;
+            border-color: var(--accent);
+            margin: auto;
+            border-radius: 8px;
+            width: 350px;
+            height: 100px;
+            resize: none;
+            font-size: 50px;
+            text-align: center;
+        }
 }
