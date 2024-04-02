@@ -11,7 +11,7 @@ import HomePage from './pages/home.jsx';
 import ProfilePage from './pages/profile.jsx';
 import SettingsPage from './pages/settings.jsx';
 import ErrorPage from './pages/error.jsx';
-
+import PrivacyPage from './pages/privacy.jsx';
 const router=createBrowserRouter([
   {
     path:'/',
@@ -29,7 +29,11 @@ const router=createBrowserRouter([
       {
         path:'/settings',
         element:<SettingsPage></SettingsPage>
-      }
+      },
+      {
+        path:'/privacy',
+        element:<PrivacyPage></PrivacyPage>
+      }    
 
     ]
   }

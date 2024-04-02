@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import Toast from 'react-bootstrap/Toast';
 import ToastContainer from 'react-bootstrap/ToastContainer';
 import "./home.css"
-
+import { Link } from "react-router-dom";
 function HomePage() {
   const [showToast, setShowToast] = useState(false);
   const [position, setPosition] = useState('top-start');
@@ -78,6 +78,11 @@ function HomePage() {
       </article>
 
     </section>
+
+        <Link to='/privacy'>
+      Privacy Policy
+        </Link>
+
 
     </>
   );
