@@ -1,3 +1,57 @@
 *{
+    font-family: Arial, Helvetica, sans-serif;
     text-align:center;
+}
+h2,h4{
+    font-weight: 800;
+    margin:2rem
+}
+#interpretation-definitions h2{
+    font-weight: 800;
+    border: 2px solid red;
+    border-radius: 8px;
+    padding: 1rem;
+    width:fit-content;
+}
+
+footer{
+    margin: auto;
+    display:flex;
+    flex-direction: column;
+    border:2px solid red;
+    border-radius:8px;
+    padding:1rem;
+    width:fit-content;
+    justify-content:center;
+}
+footer li{
+
+    font-weight: 500;
+}
+#interpretation-definitions{
+display:flex;
+}
+#interpretation-definitions article{
+    margin:5rem
+}
+#interpretation-definitions article p,#interpretation-definitions article li {
+    margin:2rem 0
+}
+
+#definitions strong{
+    font-weight:800;
+    font-size: larger;
+    margin: 0 2rem;
+    text-decoration: underline;
+}
+
+.data-collected ul{
+display:flex;
+justify-content:space-around;
+margin:2rem
+}
+
+#data{
+    display:flex;
+    flex-direction: column;
 }

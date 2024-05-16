@@ -1,5 +1,4 @@
 const db = require('../config/connection');
-const { User, Account,Password } = require('../models/index');
 const usersSeed = require('./userSeeds.json');
 const accountsSeed=require('./accountSeeds.json')
 const passwordsSeed=require('./passwordSeeds.json')
