@@ -16,7 +16,7 @@ Meant to manager your passwords
 ### Installing
 Simply Go to the [Deployed Website](https://passwordmanager-zep7.onrender.com/) 
 
-Stop by the chrome webstore for the [Password Manager]() extentions ([Repository Link]())
+Stop by the chrome webstore for the [Password Manager](https://chromewebstore.google.com/detail/passwordmanager/ojofepogaljojmebppebofcemchchbnf?authuser=0&hl=en) extention
 
 ## Help
 Since I created this project on my own and my first time ever building a chrome exetenison I'm sure there's alot of bugs and features I could add in the future 
